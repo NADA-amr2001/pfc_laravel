@@ -14,11 +14,10 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $title = $faker->sentence();
+        
         return [
             //
-            "title" => $title,
-            "slug" => Str::slug($title)
+            'title' => $this->faker->title,
         ];
     }
 }

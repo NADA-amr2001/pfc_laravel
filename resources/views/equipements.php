@@ -86,9 +86,8 @@
                 <div class="dropdown me-2">
                   <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20"> <i style="font-size: 30px !important;  " class="bi bi-person-circle"></i> </a>
                   <ul class="dropdown-menu"  aria-labelledby="dropdownMenuOffset">
-                    <li><a class="dropdown-item" id="login-btn" data-toggle="modal" href="#login" data-bs-dismiss="modal" data-target="#login" data-bs-target="#login" role="tab">LOGIN</a></li>
-                    <li><a class="dropdown-item" id="signup-btn" data-toggle="modal" href="#signup" data-target="#signup" data-bs-target="#login" role="tab">SIGN UP</a></li>
-                   
+                    <li><a class="dropdown-item" id="login-btn"  href="http://127.0.0.1:8000/login">LOG IN</a></li>
+                      <li><a class="dropdown-item" id="signup-btn"  href="http://127.0.0.1:8000/register" >SIGN UP</a></li>
                   </ul>
                 </div>
               </li>

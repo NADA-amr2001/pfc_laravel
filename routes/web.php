@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +32,20 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin routes
-Route::get('/admin', 'AdminController@index')->name('admin.index');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
+Route::post('/admin', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
+
+/*Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/login', 'AdminController@showAdminLoginForm')->name('admin.login');
 Route::post('/admin/login', 'AdminController@adminLogin')->name('admin.login');
-Route::get('/admin/logout', 'AdminController@adminLogout')->name('admin.logout');
+Route::get('/admin/logout', 'AdminController@adminLogout')->name('admin.logout');*/
 
 /*Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin', [AdminController::class, 'showAdminLoginForm']);
 Route::get('/admin', [AdminController::class, 'adminLogin']);
 Route::get('/admin', [AdminController::class, 'adminLogout']);*/
 
+
+Route::resource('/user', App\Http\Controllers\UserController::class);

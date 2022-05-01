@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
 
+  
     <!--nav-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top">
         <div class="container">
@@ -78,8 +81,8 @@
                 <div class="dropdown me-2">
                   <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20"> <i style="font-size: 30px !important;  " class="bi bi-person-circle"></i> </a>
                   <ul class="dropdown-menu"  aria-labelledby="dropdownMenuOffset">
-                    <li><a class="dropdown-item" id="login-btn" data-toggle="modal" href="{{ route('login') }}" data-bs-dismiss="modal" data-target="#login" data-bs-target="#login" role="tab">LOGIN</a></li>
-                      <li><a class="dropdown-item" id="signup-btn"  href="{{ route('register') }}" >SIGN UP</a></li>
+                    <li><a class="dropdown-item" id="login-btn"  href="http://127.0.0.1:8000/login">LOG IN</a></li>
+                    <li><a class="dropdown-item" id="signup-btn"  href="http://127.0.0.1:8000/register" >SIGN UP</a></li>
                   </ul>
                 </div> 
               </li>
@@ -103,6 +106,7 @@
             </div>
         </div>
     </div>
+    
       
       <section id="homme">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -167,13 +171,16 @@
           </button>
         </div>
 
-        <!--login modal-->
-        <div class="modal fade " id="login" aria-hidden="true" aria-labelledby="loginToggleLabel" tabindex="-1">
+
+        <!--login modal
+        {{-- Start Add Modal --}}
+       <div class="modal fade " id="login" aria-hidden="true" aria-labelledby="login-btnLabel" tabindex="-1" role="dialogue">
           <div class="modal-dialog modal-dialog-centered modal-lg" style="height: 450px; width: 400px; padding: 0;"  >
               <div class="modal-content">
-                  <!-- Modal body -->
+                   
                   <div class="modal-body">
-                   <div class="container h-100">
+
+                  <div class="container h-100">
                     <div class="d-flex justify-content-center h-100">
                       <div class="user_card">
                         <div class="d-flex justify-content-center">
@@ -218,16 +225,20 @@
                       </div>
                     </div>
                   </div>
+                   
                 </div>
             </div>
         </div>
-    </div>
+{{-- End Add Modal --}}
 
-     <!--sign up modal-->
+       
+    </div>-->
+
+     <!--sign up modal
      <div class="modal fade " id="signup" aria-hidden="true" aria-labelledby="signupToggleLabel" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-lg" style="height: 450px; width: 400px; padding: 0;"  >
           <div class="modal-content">
-              <!-- Modal body -->
+              <!-- Modal body --
               <div class="modal-body">
                 <div class="container h-100">
                   <div class="d-flex justify-content-center h-100">
@@ -285,12 +296,12 @@
             </div>
         </div>
     </div>
-</div>
-<!--forgot password-->
+</div>-->
+<!--forgot password
 <div class="modal fade " id="forgot-password" aria-hidden="true" aria-labelledby="forgot-passwordToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-lg" style="height: 450px; width: 400px; padding: 0;"  >
       <div class="modal-content">
-          <!-- Modal body -->
+          <!-- Modal body --
           <div class="modal-body">
             <div class="container h-100">
               <div class="d-flex justify-content-center h-100">
@@ -332,7 +343,7 @@
           </div>
       </div>
   </div>
-</div>
+</div>-->
       </section>
        
      
