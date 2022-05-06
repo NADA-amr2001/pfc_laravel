@@ -1,4 +1,4 @@
-/*
+
 $("#login-btn").on("click",function(e){
    e.preventDefault();
   $('#login').modal('show');
@@ -7,7 +7,7 @@ $("#login-btn").on("click",function(e){
 $("#login-btn").click(function(e){
     e.preventDefault();
     $('#login').modal();
-});*/
+});
 
 $("#rech-btn").on("click",function(e){
     e.preventDefault();

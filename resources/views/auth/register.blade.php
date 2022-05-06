@@ -37,76 +37,8 @@
     
 
   
-    <!--nav-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top">
-        <div class="container">
-            <img id="navlogo" src="image/logo@2x.png" alt="logo" >
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span id="bar" class="fas fa-bars"></span>
-          </button>
-            
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">  
-              <li class="nav-item">
-                <a id="rech-btn" class="nav-link" data-toggle="modal"  data-bs-target="#rech" role="tab" data-target="#rech" ><i style="color: black; margin-top: 10px; font-size: 30px;" class="bi bi-search"></i></a> 
-              </li>
-              <li class="nav-item">
-                <a style="margin-top: 10px;" class="nav-link active" href="#homme">Home</a>
-              </li>
-              <li class="nav-item"> 
-                <div class="dropdown me-2">
-                  <a style="margin-top: 10px;" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">Shop</a>
-                  <ul class="dropdown-menu"  aria-labelledby="dropdownMenuOffset">
-                    <li><a class="dropdown-item" id="medic-btn" href="http://127.0.0.1:8000/medicines">Medicines</a></li>
-                    <li><a class="dropdown-item" id="food-btn"  href="http://127.0.0.1:8000/food">Food</a></li>
-                    <li><a class="dropdown-item" id="equip-btn" href="http://127.0.0.1:8000/equipements">Equipements</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a style="margin-top: 10px;" class="nav-link" href="#services">Our Services</a>
-              </li>
-              <li class="nav-item">
-                <a style="margin-top: 10px;" class="nav-link" href="#about">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a style="margin-top: 10px;" class="nav-link" href="#footer">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <div>
-                  <i style="font-size: 30px !important;" class="bi bi-cart-plus-fill"></i>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div class="dropdown me-2">
-                  <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20"> <i style="font-size: 30px !important;  " class="bi bi-person-circle"></i> </a>
-                  <ul class="dropdown-menu"  aria-labelledby="dropdownMenuOffset">
-                    <li><a class="dropdown-item" id="login-btn" href="http://127.0.0.1:8000/login">LOG IN</a></li>
-                      <li><a class="dropdown-item" id="signup-btn" href="http://127.0.0.1:8000/register" >SIGN UP</a></li>
-                  </ul>
-                </div> 
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!--recherche modal-->
-      <div class="modal fade" id="rech">
-        <div class="modal-dialog" style="margin-top: 100px; width: 400px;">
-            <div class="modal-content">
-                <!-- Modal body -->
-                <div class="modal-body" style="height: 90px;">
-                  <div class="search-box" style="margin-left: 20px; margin-right: 20px;">
-                    <input class="search-txt" type="text" name="" placeholder="Type to search">
-                    <a class="search-btn" href="#">
-                     <i class="fa fa-search" aria-hidden="true"></i>
-                    </a>
-                  </div> 
-                </div>
-            </div>
-        </div>
-    </div>
-    <section id="homme">
+   
+    <section id="hm">
         @extends('layouts.app')
             @section('content')
                 <div class="container h-100">

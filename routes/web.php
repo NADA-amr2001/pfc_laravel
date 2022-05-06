@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\models\Product;
+use App\models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,19 +19,40 @@ use App\Http\Controllers;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/medicines', function () {
+
+// Route::get('/medicines/:id', function ($id) {
+//     return $id;
+//     $category = Category::findOrfail($id);
+//     return view('products')->with([
+//         "products" => $category->products()->paginate(10),
+//         "categories" =>Category::has("products")->get(),
+//     ]);
+// });
+/*Route::get('/medicines', function () {   
     return view('medicines');
-});
+});*/
+    
 Route::get('/food', function () {
     return view('food');
 });
 Route::get('/equipements', function () {
-    return view('medicines');
+    return view('equipements');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/activate/{code}', [App\Http\Controllers\ActivationController::class, 'activateUserAccount'])->name('user.activate');
+Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class, 'resendActivationCode'])->name('code.resend');
+//Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+Route::get('/categories/{id}', function($id){
+    $category = Category::findOrfail($id);
+    
+    return view('products')->with([
+        "products" => $category->products()->paginate(10),
+        "categories" =>Category::has("products")->get(),
+    ]);
+});
 
 //admin routes
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');

@@ -16,6 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -47,7 +48,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        dd($category);
         //
+        return view('products')->with([
+            "products" => $category->products()->paginate(10),
+            "categories" =>Category::has("products")->get(),
+        ]);
     }
 
     /**

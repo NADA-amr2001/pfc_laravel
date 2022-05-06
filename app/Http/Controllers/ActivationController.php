@@ -10,7 +10,7 @@ use App\Mail\ActivateYourAccount;
 class ActivationController extends Controller
 {
     //activate your account
-    public function activation($code){
+    public function activateUserAccount($code){
         $user = User::whereCode($code)->first();
         $user->code = null;
         $user->update([
@@ -21,7 +21,7 @@ class ActivationController extends Controller
     }
     
     //send email to activate user account
-    public function resendCode($code){
+    public function resendActivationCode($code){
         $user = User::whereEmail($email)->first();
         if($user->activate){
             return redirect("/");

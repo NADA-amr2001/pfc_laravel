@@ -16,6 +16,10 @@
 #homme, #medicines, #food, #equip{
     margin-bottom: 40px;
 }
+#hm{
+    margin-bottom: 40px;
+    background-color: #60a3bc;
+}
 .carousel-item{
     height: 100vh;
     min-height: 300px;
@@ -77,6 +81,10 @@
     transition: 0.3 ease;
 }
 .navbar{
+    position:fixed;
+    right:0;
+    left:0;
+    z-index:1030;
     font-size: 18px;
     top: 0;
     left: 0;
@@ -245,7 +253,12 @@ button:focus {
 
 /*footer*/
 footer{
+    position: r;
     background-color:#60a3bc;
+    right:0;
+    left:0;
+    font-size: 18px;
+    bottom: 0;
 }
 footer h5{
     color: #d8d8d8;
@@ -267,14 +280,16 @@ footer li a:hover{
     margin: 0;
     padding: 0;
     height: 100%;
+    
 }
 .user_card {
     height: 450px;
     width: 400px;
     background: #666666;
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -501,6 +516,9 @@ max-height: 100%;}
     width: 40px;
     height: 40px;
 
+}
+.modal-backdrop {
+    z-index:0
 }
 
 

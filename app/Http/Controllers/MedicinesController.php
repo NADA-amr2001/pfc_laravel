@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 
-class HomeController extends Controller
+class MedicinesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('medicines')->with([
+            "products" => Product::latest()->paginate(10),
+            "categories" =>Category::has("products")->get(),
+        ]);
     }
 }
