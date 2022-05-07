@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
                 $table->decimal("price",8,2)->default(0);
                 $table->decimal("old_price",8,2)->default(0);
                 $table->decimal("in_stock")->default(0);
+                $table->decimal("qty")->default(0);
                 $table->string("image");
                 $table->bigInteger("category_id")->unsigned();
                 $table->timestamps();

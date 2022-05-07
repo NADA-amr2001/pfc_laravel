@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -15,7 +16,28 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // 
+        //
+        return view('products')->with([
+            "products" => Product::latest()->paginate(10),
+            "categories" => Category::has("products")->get(),
+        ]);
+
+    }
+
+     /**
+     * show products by category.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getProductByCategory(Category $category)
+    {
+        $products = $category->products()->paginate(10);
+        
+        return view('product')->with([
+            "products" => $products,
+            "categories" => Category::has("products")->get(),
+        ]);
+
     }
 
     /**
@@ -48,6 +70,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return view("products.show")->with([
+            "products" => $product
+        ]);
     }
 
     /**
@@ -83,4 +108,14 @@ class ProductController extends Controller
     {
         //
     }
+    public function search(){
+         $q = request()->input('q');
+    $products=Product::where('title','like',"%$q%")
+    ->orwhere('description','like',"%$q%")
+    ->paginate(6);
+
+
+   return view('products.search')->with('products',$products);
+    }
+
 }

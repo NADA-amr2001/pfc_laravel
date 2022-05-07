@@ -4,15 +4,15 @@
       <div class="alert alert-danger">
           {{ $error}}
       </div>
-    @endforeach        
+    @endforeach
 
 @if(session()->has("errorLink"))
     <div class="alert alert-errorLink alert-dismissible fade show" >
         <strong>{!! session()->get("danger") !!}</strong>
         <button type="button " class="close">
             <span>&times;</span>
-        </button> 
-    </div>    
+        </button>
+    </div>
 @endif
 
 @if(session()->has("info"))
@@ -20,7 +20,12 @@
         <strong>{{ session()->get("info") }}</strong>
         <button type="button " class="close">
             <span>&times;</span>
-        </button>    
-    </div> 
+        </button>
+    </div>
+@endif
+
+@if (request()->input())
+<h6> {{ $products -> total() }}resultat(s) pour la recherche "{{request()->q     }}" </h6>
+
 @endif
 

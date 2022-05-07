@@ -24,9 +24,15 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/quantity.js') }}" defer></script>
 
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -89,7 +95,7 @@
               </li>
               <li class="nav-item">
                 <div>
-                  <i style="font-size: 30px !important;" class="bi bi-cart-plus-fill"></i>
+                  <i style="font-size: 30px !important;" href="/cart" class="bi bi-cart-plus-fill"></i>
                 </div>
               </li>
               <li class="nav-item">
@@ -114,7 +120,8 @@
           </div>
         </div>
     </nav>
-      <!--recherche modal-->
+    @include('partials.search')
+      {{-- <!--recherche modal-->
       <div class="modal fade" id="rech">
         <div class="modal-dialog" style="margin-top: 100px; width: 400px;">
             <div class="modal-content">
@@ -129,15 +136,13 @@
                 </div>
             </div>
         </div>
-      </div>
+      </div> --}}
          <!--login modal-->
        <div class="modal fade " id="login" >
           <div class="modal-dialog modal-dialog-lg modal-dialog-centered"   >
             <div class="modal-content user_card" >
 
-              <div class="modal-body" style="height:450px; width: 100%; padding: 0;" >
-
-
+              <div class="modal-body" >
                      <div class="d-flex justify-content-center h-100">
                        <div class="">
                          <div class="d-flex justify-content-center" style="margin-bottom: 30px">
@@ -262,6 +267,14 @@
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input id="password-confirm" type="password" placeholder="Confirm password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                          </div>
+
+                          <div class="input-group mb-2">
+                              <select class="form-select" aria-label="Default select example">
+                                <option selected>Seller Or Buyer</option>
+                                <option value="shopper">Buyer</option>
+                                <option value="seller">Seller</option>
+                              </select>
                           </div>
 
                             <div class="d-flex justify-content-center mt-3 login_container">

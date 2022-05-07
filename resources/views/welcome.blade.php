@@ -173,7 +173,7 @@
                       We at M-Rare Store believe in high quality and exceptional customer service. But most importantly, we believe shopping is a right, not a luxury, so we strive to deliver the best products at the most affordable prices, and ship them to you regardless of where you are located.</p>
                 </div>
                 <div class = "col-lg-6 order-lg-0">
-                    <img  src = "image/about-us.png" alt = "" class = "img-fluid">
+                    <img  src = "/image/about-us.png" alt = "" class = "img-fluid">
                 </div>
             </div>
         </div>
