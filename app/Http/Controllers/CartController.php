@@ -9,6 +9,7 @@ class CartController extends Controller
 {
     //return cart items
     public function index(){
+        // dd(\Cart::getContent());
         return view("cart.index")->with([
             "items" => \Cart::getContent()
         ]);

@@ -1,4 +1,4 @@
-<form action="{{ route('products.show') }}" class="d-flex mr-3">
+{{-- <form action="{{ route('products.show') }}" class="d-flex mr-3">
 <div id="detail" class="modal fade" tabindex="-1" role="dialog" style="display: none;" >
     <div class="modal-dialog modal-dialog-centered modal-lg "  role="document">
         <div class="modal-content card " style="height: 100%; width: 100%" id="details" >
@@ -61,4 +61,4 @@
         </div>
     </div>
 </div>
-</form>
+</form> --}}

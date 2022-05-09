@@ -1,76 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('connexion') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('admin.login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-4">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('auth.forgot') }}
-                                </a>
-                            </div>
-                        </div>
-
-                        <p class="text-center mb-3">
-                            Or Login with
-                        </p>
-
-                        @include('partials.socials-icons')
-
-                    </form>
-                </div>
-            </div>
+<div class="d-flex justify-content-center h-100">
+    <div class="">
+      <div class="d-flex justify-content-center" style="margin-bottom: 30px">
+        <div class="brand_logo_container">
+          <img src="image/mrare.png" class="brand_logo" alt="Logo">
         </div>
+      </div>
+      <div class="d-flex justify-content-center form_container">
+       <form method="POST" action="{{ route('admin.login') }}">
+         @csrf
+         <div class="input-group mb-3">
+           <div class="input-group-append">
+             <span class="input-group-text"><i class="fas fa-user"></i></span>
+           </div>
+           <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+           @error('email')
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+            </span>
+           @enderror
+         </div>
+         <div class="input-group mb-2">
+           <div class="input-group-append">
+             <span class="input-group-text"><i class="fas fa-key"></i></span>
+           </div>
+           <input id="password" placeholder="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+            @error('password')
+              <span class="invalid-feedback" role="alert">
+               <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+         </div>
+         <div class="form-group">
+           <div class="custom-control custom-checkbox">
+             <input type="checkbox" class="custom-control-input" name="remember"  id="remember" {{ old('remember') ? 'checked' : '' }}>
+             <label class="custom-control-label" for="remember">
+               {{ __('Stay connected') }}
+            </label>
+           </div>
+         </div>
+         <div class="d-flex justify-content-center mt-3 login_container">
+           <button type="submit" name="button" class="btn login_btn">connexion</button>
+         </div>
+         {{-- <div class="mt-4">
+           <div class="d-flex justify-content-center links">
+             {{-- Don't have an account? <a style="color: #fff;" id="signup-link" data-dismiss="modal" id="signup-link" href="#signup" data-toggle="modal" data-target="#signup" role="tab" data-bs-target="#signup" data-bs-toggle="modal" class="ml-2">Sign Up</a> 
+           </div>
+
+         </div> --}}
+       </form>
+      </div>
     </div>
-</div>
+  </div>
+
 @endsection

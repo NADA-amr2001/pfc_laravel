@@ -58,6 +58,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'type' => ['required', 'integer', 'in:0,1']
+
         ]);
     }
 
@@ -73,14 +75,16 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'type' => $data['type'],
+
         ]);
     }
     // /**
     //  * the user has been registered
-    //  * 
+    //  *
     //  * @param \Illuminate\Http\Request $request
     //  * @param mixed $user
-    //  * @param mixed 
+    //  * @param mixed
     //  */
     // protected function registered(Request $request,$user){
     //     //generate user activation code
@@ -96,8 +100,8 @@ class RegisterController extends Controller
     //     return redirect("/login")
     //            ->withInfo("Please confirm your email, the link is sent to your email address");
     // }
-    
-    
+
+
 
 
 

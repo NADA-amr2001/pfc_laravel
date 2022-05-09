@@ -30,14 +30,14 @@
                                     @csrf
                                     @method("PUT")
                                     <div class="form-group">
-                                        <input type="number" style="width: 80px" name="qty" id="qty" value="{{$item->quantity }} " max="{{ $item->associatedModel->in_stock}}" min="1" class="form-control">
+                                        <input type="number" style="width: 80px" name="qty" id="qty" value="{{$item->quantity }}" max="{{ $item->associatedModel->in_stock}}" min="1" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-sm btn-warning " ><i class="fa fa-edit"></i></button>
                                     </div>
                                  </form>
 							</td>
-							<td data-th="Subtotal" class="text-center">{{ $item->price * $item->quantity}} DA</td>
+							<td data-th="Subtotal" class="text-center">{{ $item->associatedModel->price * $item->quantity}} DA</td>
 							<td class="actions" data-th="">
                                 <form action="{{ route("remove.cart", $item->associatedModel->id) }}" method="post" class="d-flex flex-row justify-content-center align-items-center" >
                                     @csrf

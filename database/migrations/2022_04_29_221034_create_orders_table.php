@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
                 $table->bigInteger("user_id")->unsigned();
                 $table->string("product_name");
                 $table->integer("qty");
-                $table->decimal("price",8,2);
-                $table->decimal("total",8,2);
+                $table->double("price",8,2);
+                $table->double("total",8,2);
                 $table->boolean("paid")->default(0);
                 $table->boolean("delivered")->default(0);
                 $table->timestamps();
@@ -31,7 +31,7 @@ class CreateOrdersTable extends Migration
             });
 
         }
-       
+
     }
 
     /**

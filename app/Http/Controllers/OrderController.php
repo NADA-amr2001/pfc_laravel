@@ -71,6 +71,10 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         //
+        $order->update([
+            "delivered" => 1
+        ]);
+         return redirect()->back()->withSuccess("order updated");
     }
 
     /**
@@ -82,5 +86,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+        $order->delete();
+         return redirect()->back()->withSuccess("order deleted");
     }
 }

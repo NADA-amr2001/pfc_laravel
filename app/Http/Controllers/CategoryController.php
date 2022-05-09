@@ -6,8 +6,19 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
+use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin'], ['only' => ['create', 'store']]);
+
+        // $this->middleware("auth:admin")->except([
+        //     "index","show"
+        // ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +46,16 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request  $request)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required|string',
+
+         ]);
+         $category = Category::create(request()->all());
+        return back()->with('success', 'Your form has been submitted.');
+
+
     }
 
     /**
@@ -48,12 +66,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        dd($category);
-        //
-        return view('products')->with([
-            "products" => $category->products()->paginate(8),
-            "categories" =>Category::has("products")->get(),
-        ]);
+            // $category = Category::findOrfail($id);
+
+            return view('products')->with([
+                "products" => $category->products()->paginate(10),
+                "categories" =>Category::has("products")->get(),
+            ]);
     }
 
     /**

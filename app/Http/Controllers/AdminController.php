@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth:admin')->except(["showAdminLoginForm","adminLogin"]);
+        $this->middleware(['auth','admin'], ['except' => ['showAdminLoginForm', 'adminLogin']]);
+
     }
 
     public function index(){
-        return view("admin.index");
+        // dd('dfgd');
+        return view("admin.index")->with([
+            "products" => Product::all(),
+            "orders" => Order::all()
+        ]);
     }
     public function showAdminLoginForm(){
         return view("admin.auth.login");
@@ -34,5 +41,17 @@ class AdminController extends Controller
     public function adminLogout(){
         auth()->guard("admin")->logout();
         return redirect()->route("admin.login");
+    }
+    public function getProducts(){
+        return view("admin.products.index")->with([
+            "products" => Product::latest()->paginate(5)
+        ]);
+
+    }
+    public function getOrders(){
+        return view("admin.orders.index")->with([
+            "orders" => Order::latest()->paginate(5)
+        ]);
+
     }
 }

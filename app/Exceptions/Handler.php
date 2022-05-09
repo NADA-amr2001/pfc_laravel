@@ -38,4 +38,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $exception){
+        if(!auth()->guard("admin")->check()){
+            if($request->is("admin") || $request->is('admin/*')){
+                return redirect()->quesy("/admin/login");
+            }
+        }
+
+        return parent::render($request, $exception);
+    }
 }

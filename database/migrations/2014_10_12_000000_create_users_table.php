@@ -26,10 +26,11 @@ class CreateUsersTable extends Migration
                 $table->string('code')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
+                $table->integer('type')->default(0);
             });
 
         }
-        
+
     }
 
     /**

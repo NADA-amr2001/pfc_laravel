@@ -19,14 +19,15 @@ class CreateProductsTable extends Migration
                 $table->string("title");
                // $table->string("slug",191)->unique();
                 $table->string("description");
-                $table->decimal("price",8,2)->default(0);
-                $table->decimal("old_price",8,2)->default(0);
-                $table->decimal("in_stock")->default(0);
-                $table->decimal("qty")->default(0);
+                $table->double("price",8,2)->default(0);
+                $table->double("old_price",8,2)->default(0);
+                $table->integer("in_stock")->default(0);
+                $table->integer("qty")->default(0);
                 $table->string("image");
-                $table->bigInteger("category_id")->unsigned();
+                $table->integer("category_id")->unsigned();
+                $table->integer("user_id")->unsigned();
                 $table->timestamps();
-                $table->foreign("category_id")->references("id")->on("categories")->onDelete("cascade");
+                //$table->foreign("category_id")->references("id")->on("categories");
             });
 
         }

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
+
 class ProductController extends Controller
 {
 
@@ -26,9 +30,9 @@ class ProductController extends Controller
     {
         $this->middleware(['auth','seller'], ['only' => ['create', 'store']]);
 
-        // $this->middleware("auth:admin")->except([
-        //     "index","show"
-        // ]);
+        $this->middleware("auth:admin")->except([
+            "index","show"
+        ]);
     }
 
      /**
@@ -68,10 +72,10 @@ class ProductController extends Controller
      */
     public function store(Request  $request)
     {
-    //     //
+        //
 
-    //    dd("request()->all()");
-    //    return "hhhh";
+       dd("request()->all()");
+       return "hhhh";
 
         $this->validate(request(), [
             'title' => 'required|string',
@@ -83,16 +87,15 @@ class ProductController extends Controller
 
          ]);
 
+
           $product = $request->all();
-          $name = $request->file('image')->getClientOriginalName();
-          $request->image->move(public_path('uploads/images'), $name);
-          $path = "/uploads/images/$name";
-          $product['image']= $path;
-          $product['in_stock']= $request->qty;
+        //   $name = $request->file('image')->getClientOriginalName();
+        //   $path = $request->file('image')->store('public/uploads/images');
+        //   $product['image']= $path;
         //  Store data in database
         // $product = Product()
-        auth()->user()->products()->create( $product);
-        // dd($product);
+        $product = auth()->user()->products()->create( $product);
+        dd($product);
         return back()->with('success', 'Your form has been submitted.');
 
 

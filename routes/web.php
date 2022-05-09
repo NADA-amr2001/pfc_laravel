@@ -47,17 +47,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/activate/{code}', [App\Http\Controllers\ActivationController::class, 'activateUserAccount'])->name('user.activate');
 Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class, 'resendActivationCode'])->name('code.resend');
 //Route::resource('/categories', App\Http\Controllers\CategoryController::class);
-Route::get('/categories/{id}', function($id){
-    $category = Category::findOrfail($id);
 
-    return view('products')->with([
-        "products" => $category->products()->paginate(10),
-        "categories" =>Category::has("products")->get(),
-    ]);
-});
 
+//seller
+Route::resource('products', App\Http\Controllers\ProductController::class);
+Route::resource('categories', App\Http\Controllers\CategoryController::class);
 //Route::get('products/category/{category}',[App\Http\Controllers\ProductController::class, 'getProductByCategory'])->("category.products");
-Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+// Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 
 //search
 //  Route::get('/search','ProductController@search')->name('products.search');
@@ -72,9 +68,15 @@ Route::put('/update/{product}/cart', [App\Http\Controllers\CartController::class
 
 //admin routes
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/admin', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login');
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
+Route::get('/admin/login', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
+Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
+Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
+Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
+
+//orders routes
+Route::resource('orders', 'OrderController');
+
 
 /*Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/login', 'AdminController@showAdminLoginForm')->name('admin.login');
