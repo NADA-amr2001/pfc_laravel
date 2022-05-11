@@ -5,6 +5,7 @@ use App\Http\Controllers;
 //use App\Http\Controllers\ProductController;
 use App\models\Product;
 use App\models\Category;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,16 @@ Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOr
 
 //orders routes
 Route::resource('orders', 'OrderController');
+
+//payment routes
+Route::get('/handle-payment', [App\Http\Controllers\PaypalpaymentController::class, 'handlepayment'])->name('make.payment');
+Route::get('/cancel-payment', [App\Http\Controllers\PaypalpaymentController::class, 'paymentCancel'])->name('cancel.payment');
+Route::get('/payment-success', [App\Http\Controllers\PaypalpaymentController::class, 'paymentSuccess'])->name('success.payment');
+
+//contact us
+Route::get('/contact-us', [ContactController::class, 'index']);
+Route::post('/contact-us', [ContactController::class, 'save'])->name('contact.store');
+
 
 
 /*Route::get('/admin', 'AdminController@index')->name('admin.index');

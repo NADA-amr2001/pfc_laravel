@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         if(!Schema::hasTable('products')){
             Schema::create('products', function (Blueprint $table) {
-                $table->id();
+                $table->increments('id');
                 $table->string("title");
                // $table->string("slug",191)->unique();
                 $table->string("description");
@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
                 $table->integer("category_id")->unsigned();
                 $table->integer("user_id")->unsigned();
                 $table->timestamps();
-                //$table->foreign("category_id")->references("id")->on("categories");
+                $table->foreign("category_id")->references("id")->on("categories");
             });
 
         }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+
 class ProductController extends Controller
 {
 
@@ -15,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('products')->with([
+        return view('home')->with([
             "products" => Product::latest()->paginate(10),
             "categories" => Category::has("products")->get(),
         ]);
@@ -27,8 +29,8 @@ class ProductController extends Controller
         $this->middleware(['auth','seller'], ['only' => ['create', 'store']]);
 
         // $this->middleware("auth:admin")->except([
-        //     "index","show"
-        // ]);
+        //        "index","show"
+        //  ]);
     }
 
      /**
@@ -56,7 +58,7 @@ class ProductController extends Controller
     {
         //
         return view('products.create');
-        //return view("admin.products.create")->with(["categories" => Category::all()]);
+         //return view("admin.products.create")->with(["categories" => Category::all()]);
 
     }
 
@@ -158,3 +160,4 @@ class ProductController extends Controller
 
 
 }
+

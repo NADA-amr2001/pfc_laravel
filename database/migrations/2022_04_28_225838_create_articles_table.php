@@ -15,14 +15,14 @@ class CreateArticlesTable extends Migration
     {
         if(!Schema::hasTable('articles')){
             Schema::create('articles', function (Blueprint $table) {
-                $table->id();
+                $table->increments('id');
                 $table->string('title');
                 $table->text('body');
                 $table->timestamps();
             });
 
         }
-        
+
     }
 
     /**

@@ -10,16 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!--bootstrap-->
+     <!--bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    {{-- <script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> --}}
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-        {{-- < link rel = "stylesheet"
-        href = "https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-        integrity = "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin = "anonymous" > --}}
-            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+     <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity = "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin = "anonymous" >
+     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -33,14 +30,7 @@
    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-
-            <
-            !--Scripts-- >
-            <
-            script src = "{{ asset('js/app.js') }}"
-        defer >
-    </script>
-    <script src="{{ asset('js/quantity.js') }}" defer></script>
+    {{-- <script src = "{{ asset('js/app.js') }}" defer > </script> --}}
 
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -109,7 +99,7 @@
                             <a style="margin-top: 10px;" class="nav-link" href="/#about">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-top: 10px;" class="nav-link" href="#footer">Contact Us</a>
+                            <a style="margin-top: 10px;" class="nav-link" id="contact-btn" data-toggle="modal" data-target="#contact" data-bs-target="#contact" role="tab" href="#contact">Contact Us</a>
                         </li>
                         @if (!Auth::guest() && Auth::user()->type == 1)
                             <li class="nav-item">
@@ -159,13 +149,9 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                                     @guest
 
-                                        <li><a class="dropdown-item" id="login-btn" data-toggle="modal"
-                                                data-target="#login" data-bs-target="#login" role="tab" href="#login">LOG
-                                                IN</a></li>
+                                        <li><a class="dropdown-item" id="login-btn" data-toggle="modal" data-target="#login" data-bs-target="#login" role="tab" href="#login">LOG IN</a></li>
 
-                                        <li><a class="dropdown-item" id="signup-btn" data-toggle="modal"
-                                                data-target="#signup" data-bs-target="#signup" role="tab"
-                                                href="#signup">SIGN UP</a></li>
+                                        <li><a class="dropdown-item" id="signup-btn" data-toggle="modal" data-target="#signup" data-bs-target="#signup" role="tab" href="#signup">SIGN UP</a></li>
 
                                     @endguest
                                     @auth
@@ -201,6 +187,9 @@
             </div>
         </div>
       </div> --}}
+
+
+
 
         <!--add product-->
         <div class="modal fade " id="add">
@@ -295,7 +284,7 @@
             </div>
         </div>
 
-        <!--add product-->
+        <!--add category-->
         <div class="modal fade " id="add-category">
             <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
                 <div class="modal-content user_card">
@@ -350,7 +339,7 @@
 
             </div>
         </div>
-
+        {{-- alerts --}}
         <div style="margin-top: 80px" class="row">
             <div class="div.col-md-8 mx-auto my-4">
                 @include('layouts.alerts')
@@ -358,6 +347,7 @@
 
         </div>
 
+        {{-- content --}}
         <main class="py-4">
             @yield('content')
         </main>
@@ -751,6 +741,101 @@
                 </div>
             </div>
         </div>-->
+
+        {{-- contact us --}}
+        <div class="modal fade " id="contact">
+            <div class="modal-dialog modal-dialog-xl modal-dialog-centered">
+                <div class="modal-content ">
+
+                    <div class="modal-body">
+
+                            <div class=" text-center mt-5 ">
+                                <h1 style=" margin-bottom: 40px; color:#60a3bc" >Contact Us</h1>
+                            </div>
+                            @if(Session::has('success'))
+                               <div class="alert alert-success">
+                                  {{ Session::get('success') }}
+                              </div>
+                            @endif
+                            <div class="row ">
+                              <div class="col-lg-12 mx-auto">
+                                <div class="card mt-2 mx-auto p-1 bg-light">
+                                  <div id="card_l" class="card-body bg-light">
+                                     <div class = "container" style="width: 440px">
+                                        <form id="contact-form" role="form" method="post" action="contact-us">
+                                            {{csrf_field()}}
+                                          <div class="controls">
+                                            <div class="row">
+                                                 <div class="col-md-6">
+                                                     <div class="form-group">
+                                                         <label id="cont_l" for="form_name">Firstname *</label>
+                                                         <input id="form_name" type="text" class="form-control @error('name') is-invalid @enderror" type="text" name="name"  placeholder="Please enter your firstname *" required="required" data-error="Firstname is required."  >
+                                                         @error('name')
+                                                          <span class="invalid-feedback" role="alert">
+                                                          <strong>{{ $message }}</strong>
+                                                          </span>
+                                                         @enderror
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-md-6">
+                                                     <div class="form-group">
+                                                          <label id="cont_l"  for="form_lastname">Lastname *</label>
+                                                          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                        <label id="cont_l"  for="form_email">Email *</label>
+                                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                                 </div>
+                                              </div>
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label id="cont_l"  for="form_phone">Phone *</label>
+                                                    <input id="form_phone" type="phone" name="phone" class="form-control" placeholder="Please enter your phone *" required="required" data-error="Valid phone is required.">
+                                             </div>
+                                              </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div style="margin-left: 90px" class="form-group">
+                                                       <label id="cont_l"  for="form_need">Please specify your need *</label>
+                                                       <select id="form_need" style="height: 35px" name="need" class="form-control" required="required" data-error="Please specify your need.">
+                                                          <option value="" selected disabled>--Select Your Issue--</option>
+                                                          <option >Request Invoice for order</option>
+                                                          <option >Request order status</option>
+                                                          <option >Haven't received cashback yet</option>
+                                                          <option >Other</option>
+                                                       </select>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                     <label id="cont_l"  for="form_message">Message *</label>
+                                                     <textarea id="form_message" name="message" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                   <input type="submit" class="btn  btn-send  pt-2 btn-block " value="Send Message" >
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                  </div>
+                              </div>
+                           </div>
+
+                  </div>
+              </div>
+           </div>
+       </div>
+   </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="

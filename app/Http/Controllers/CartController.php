@@ -20,7 +20,9 @@ class CartController extends Controller
         \Cart::add(array(
             "id" => $product->id,
             "name" => $product->title,
+            // "name" => $product->title,
             "price" => $product->price,
+           // "description" => $product->description,
             "quantity" => $request->qty,
             "attributes" => array(),
             "associatedModel" => $product,

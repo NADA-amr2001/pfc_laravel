@@ -87,7 +87,7 @@
     z-index:1030;
     font-size: 18px;
     top: 0;
-    left: 0;
+
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .navbar-light .navbar-nav .nav-link{
@@ -119,6 +119,7 @@ color: #60a3bc;
 #bar.active{
     color: #60a3bc;
 }
+
 /*mobile nav*/
 .navbar-light .navbar-toggler{
     border: none;
@@ -556,6 +557,29 @@ footer li a:hover{
 	table#cart tfoot td .btn{display:block;}
 
 }
+#cont_l{
+    color: #666666;
+}
+#card_l{
+
+
+}
+.btn-send {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    width: 50%;
+
+    background-color: #60a3bc;
+    color: #fff;
+    }
+
+    .help-block.with-errors {
+        color: #ff5050;
+        margin-top: 5px;
+
+    }
+
 
 
 

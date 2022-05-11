@@ -20,7 +20,7 @@
 								<div class="row">
 									<div class="col-sm-5 hidden-xs"><img src="{{ $item->associatedModel->image }}" alt="{{ $item->title}}" class="img-responsive img-fluid rounded"/></div>
 									<div class="col-sm-7">
-										<h4 class="nomargin">{{ $item->name}}</h4>
+										<h4 class="nomargin">{{ $item->title}}</h4>
 									</div>
 								</div>
 							</td>
@@ -60,6 +60,16 @@
 						</tr>
 					</tfoot>
 				</table>
+
+                @if (Cart::getSubtotal() > 0 )
+                <div class="form-group">
+                    <a href="{{ route("make.payment")  }}" class="btn btn-primary mt-3">
+                       Payer {{ Cart::getSubtotal()  }} DA via paypal
+                    </a>
+                </div>
+
+                @endif
+
 </div>
 
 @endsection
