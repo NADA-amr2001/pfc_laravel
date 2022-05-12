@@ -43,13 +43,15 @@
                                         </div>
                                     </div>
                                     <div class="details col-md-6">
+
                                         <h2 class="product-title">{{ $product->title }}</h2>
                                         {{-- <span>{{ $product->category->title }}</span> --}}
                                         <p class="product-description">{{ $product->description }}</p>
                                         <h4 class="price">current price:<br> <span>{{ $product->price }}
                                                 DA</span></h4>
-                                        <h4 class="price">old price:<br><strike> <span>{{ $product->old_price }}
-                                                    DA </strike></span></h4>
+                                        <h4 class="price">Seller Name:<br>
+                                            <h5>{{ $product->user->name }}  <a href="mailto:{{ $product->user->email }}">    Send Email</a></h5>
+
                                         <p class="vote"><strong>91%</strong> of buyers use this product!
                                             <strong>(87 votes)</strong></p>
                                         <p class="font-weight-bold">
@@ -63,22 +65,23 @@
                                                 </span>
                                             @endif
                                         </p>
+                                        @if ($product->in_stock >0)
                                         <form action="{{ route('add.cart', $product->id) }}" method="post">
                                             @csrf
                                             <p><strong> Quantity:</strong></p>
                                             <div style="width: 150px; height: 40px;" class="input-group">
                                                 <span class="input-group-btn">
-                                                    <button onclick="document.getElementById('qty-{{ $product->id }}').value=Math.max(document.getElementById('qty-{{ $product->id }}').value-1,1)" id="qnt-btnm" type="button" class="btn-number"
+                                                    <button onclick="document.getElementById('qty-{{ $product->id }}').value--" id="qnt-btnm" type="button" class="btn-number"
                                                          data-type="minus" data-field="qty">
                                                         <span class="glyphicon glyphicon-minus"><i
                                                                 class="bi bi-dash-lg"></i></span>
                                                     </button>
                                                 </span>
-                                                <input onchange="setQty({{ $product->in_stock }})" style="height: 40px;" type="text" name="qty" id="qty-{{ $product->id }}"
+                                                <input  onkeyup="setQty('qty-{{$product->id}}',{{ $product->in_stock}})" style="height: 40px;" type="text" name="qty" id="qty-{{ $product->id }}"
                                                     class="form-control input-number" value="1" min="1"
                                                     max="{{ $product->in_stock }}">
                                                 <span class="input-group-btn">
-                                                    <button onclick="document.getElementById('qty-{{ $product->id }}').value=Math.min(document.getElementById('qty-{{ $product->id }}').value+1,{{ $product->in_stock }})" id="qnt-btnp" type="button" class="  btn-number"
+                                                    <button onclick="document.getElementById('qty-{{ $product->id }}').value++" id="qnt-btnp" type="button" class="  btn-number"
                                                         data-type="plus" data-field="qty">
                                                         <span class="glyphicon glyphicon-plus"><i
                                                                 class="bi bi-plus"></i></span>
@@ -105,6 +108,7 @@
                                                 @endguest
                                             </div>
                                         </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

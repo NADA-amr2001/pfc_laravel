@@ -14,7 +14,7 @@
               <img src="image/homme@2x.png" class="d-block w-100" alt="...">
               <div class="carousel-caption ">
                 <div class="txt" id="txt">
-                  <h5 class="animated bounceIbRight" style="animation-delay: 1s;">Welcome to M-Rare Store</h5>
+                  <h5 class="animated bounceIbRight" style="animation-delay: 1s; ">Welcome to M-Rare Store</h5>
                   <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s;">We have medicines, foods and all the supplies of rare diseases .</p>
                 </div>
                   <!--<p class="animated bounceIbRight" style="animation-delay: 3s;"><a id="login-btn" data-toggle="modal" href="#login" data-target="#login" data-bs-target="#login" role="tab">Login</a> </p>

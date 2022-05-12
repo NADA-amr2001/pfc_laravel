@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Srmklive\Paypal\Services\ExpressCheckout;
 use Illuminate\Http\Request;
 use HasFactory;
 use App\Models\Product;
-
 
 
 class PaypalPaymentController extends Controller
@@ -22,16 +20,17 @@ class PaypalPaymentController extends Controller
     public function handlePayment(){
         $data =[];
         $data['items'] = [     ];
+        $total = 0;
 
         foreach(\Cart::getContent() as $item){
-
             array_push($data['items'],[
                 'title' =>$item->title,
                 'price '=> (int) ($item->price / 14),
-                'description'=>$item ->associateModel->description,
+                'description'=>$item ->associatedModel->description,
                 //'desc' => $item->product->description,
                 'qty' => $item->quantity
             ]);
+            $total += $item['price'] * $item['quantity'];
         }
 
             $data['invoice_id'] = auth()->user()->id  ;
@@ -40,15 +39,9 @@ class PaypalPaymentController extends Controller
             $data['cancel_url'] = route('cancel.payment')  ;
 
 
-            $total = 0;
-            foreach ($data['items'] as $item ) {
-                $total += $item['price'] * $item['qty'];
-
-            }
-
 
             $data['total'] = $total ;
-            $paypalModule = new ExpressCheckout ;
+            $paypalModule = new ExpressCheckout();
 
 
             $res =  $paypalModule ->setExpressCheckout($data);

@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware(['auth','admin'], ['except' => ['showAdminLoginForm', 'adminLogin']]);
+        $this->middleware(['auth:admin'], ['except' => ['showAdminLoginForm', 'adminLogin']]);
 
     }
 
@@ -33,7 +33,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ],$request->get("remember"))){
-            return redirect("/admin");
+            return redirect()->route("admin.index");
         }else{
             return redirect()->route("admin.login");
         }

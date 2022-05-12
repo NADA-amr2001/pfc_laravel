@@ -70,7 +70,7 @@ class CategoryController extends Controller
 
             return view('products')->with([
                 "products" => $category->products()->paginate(10),
-                "categories" =>Category::has("products")->get(),
+                "categories" =>Category::has("products.user")->get(),
             ]);
     }
 

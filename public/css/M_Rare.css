@@ -26,7 +26,7 @@
     outline: none;
 }
 .carousel-item img{
-    opacity: 95%;
+   /* opacity: 95%;*/
 }
 .carousel-caption{
     bottom: 220px;
@@ -46,7 +46,7 @@
     line-height: 1.9;
 }
 #txt{
-    background-image:url(image/txt.png);
+    background-image:url(/image/txt.png);
      color: white;
 }
 .carousel-caption a{

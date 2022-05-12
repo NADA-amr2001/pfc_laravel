@@ -131,6 +131,9 @@
                                         <li><a class="dropdown-item" id="add-category-btn" data-toggle="modal"
                                                 data-target="#add-category" data-bs-target="#add-category" role="tab" href="#add-category">Add
                                                 Category</a></li>
+                                                <a class="dropdown-item" id="add-btn" data-toggle="modal"
+                                                data-target="#add" data-bs-target="#add" role="tab" href="#add">Add
+                                                Product</a></li>
 
                                 </div>
                             </li>
@@ -429,7 +432,7 @@
                 <!-- Section: Social media -->
                 <section class="mb-4">
                     <!-- Facebook -->
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!"
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="https://www.facebook.com/profile.php?id=100016738602511"
                         role="button"><i class="fab fa-facebook-f"></i></a>
 
                     <!-- Twitter -->
@@ -437,7 +440,7 @@
                         role="button"><i class="fab fa-twitter"></i></a>
 
                     <!-- Google -->
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;" href="#!"
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;" href="https://www.google.com/?hl=fr"
                         role="button"><i class="fab fa-google"></i></a>
 
                     <!-- Instagram -->
@@ -448,7 +451,7 @@
                     <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!"
                         role="button"><i class="fab fa-linkedin-in"></i></a>
                     <!-- Github -->
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!"
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/NADA-amr2001/pfc_laravel"
                         role="button"><i class="fab fa-github"></i></a>
                 </section>
                 <!-- Section: Social media -->
@@ -768,9 +771,9 @@
                                             <div class="row">
                                                  <div class="col-md-6">
                                                      <div class="form-group">
-                                                         <label id="cont_l" for="form_name">Firstname *</label>
-                                                         <input id="form_name" type="text" class="form-control @error('name') is-invalid @enderror" type="text" name="name"  placeholder="Please enter your firstname *" required="required" data-error="Firstname is required."  >
-                                                         @error('name')
+                                                         <label id="cont_l" for="form_fname">Firstname *</label>
+                                                         <input id="form_fname" type="text" class="form-control @error('fname') is-invalid @enderror" type="text" name="fname"  placeholder="Please enter your firstname *" required="required" data-error="Firstname is required."  >
+                                                         @error('fname')
                                                           <span class="invalid-feedback" role="alert">
                                                           <strong>{{ $message }}</strong>
                                                           </span>
@@ -779,8 +782,13 @@
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
-                                                          <label id="cont_l"  for="form_lastname">Lastname *</label>
-                                                          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                                                          <label id="cont_l"  for="form_lname">Lastname *</label>
+                                                          <input id="form_lname" type="text" class="form-control @error('lname') is-invalid @enderror" type="text" name="lname"  placeholder="Please enter your last name *" required="required" data-error="Last tname is required."  >
+                                                         @error('name')
+                                                          <span class="invalid-feedback" role="alert">
+                                                          <strong>{{ $message }}</strong>
+                                                          </span>
+                                                         @enderror
                                                      </div>
                                                  </div>
                                              </div>
@@ -788,13 +796,23 @@
                                               <div class="col-md-6">
                                                   <div class="form-group">
                                                         <label id="cont_l"  for="form_email">Email *</label>
-                                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="form_email" type="email" name="email"  placeholder="Please enter your email *" required="required" data-error="Valid email is required." >
+                                                        @error('email')
+                                                           <span class="invalid-feedback" role="alert">
+                                                                     <strong>{{ $message }}</strong>
+                                                           </span>
+                                                        @enderror
                                                  </div>
                                               </div>
                                               <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label id="cont_l"  for="form_phone">Phone *</label>
-                                                    <input id="form_phone" type="phone" name="phone" class="form-control" placeholder="Please enter your phone *" required="required" data-error="Valid phone is required.">
+                                                    <input type="text" class="form-control @error('phone') is-invalid @enderror"  name="phone" id="form_phone"  placeholder="Please enter your phone *" required="required" data-error="Valid phone is required.">
+                                                    @error('phone')
+                                                       <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                       </span>
+                                                    @enderror
                                              </div>
                                               </div>
 
@@ -817,11 +835,16 @@
                                                 <div class="col-md-12">
                                                    <div class="form-group">
                                                      <label id="cont_l"  for="form_message">Message *</label>
-                                                     <textarea id="form_message" name="message" class="form-control" placeholder="Write your message here." rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                     <textarea class="form-control textarea @error('msg') is-invalid @enderror"  name="msg" id="form_message"  placeholder="Write your message here." rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                     @error('message')
+                                                        <span class="invalid-feedback" role="alert">
+                                                           <strong>{{ $message }}</strong>
+                                                        </span>
+                                                     @enderror
                                                   </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                   <input type="submit" class="btn  btn-send  pt-2 btn-block " value="Send Message" >
+                                                   <button type="submit" class="btn btn-send  pt-2 btn-block" style="margin-left:100px" >Send</button>
                                                 </div>
                                             </div>
                                           </div>

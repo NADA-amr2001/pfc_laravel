@@ -9,9 +9,17 @@ class CartController extends Controller
 {
     //return cart items
     public function index(){
+        $cart = \Cart::getContent();
+        $total = 0;
+        foreach ($cart as $item){
+            $total += $item["price"]*$item["quantity"];
+        }
+        // return $cart;
         // dd(\Cart::getContent());
+
         return view("cart.index")->with([
-            "items" => \Cart::getContent()
+            "items" =>$cart,
+            "total"=>$total
         ]);
     }
 

@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "title","description","price","old_price","image","in_stock","qty","category_id"
+        "title","description","price","old_price","image","in_stock","qty","category_id","user_id"
     ];
     /*public function getRouteKeyName(){
         return "slug";
@@ -20,6 +20,10 @@ class Product extends Model
     // }
     public function category()
 {
-    return $this->belongsTo(Category::class, 'id');
+    return $this->belongsTo(Category::class);
+}
+public function user()
+{
+    return $this->belongsTo(User::class);
 }
 }

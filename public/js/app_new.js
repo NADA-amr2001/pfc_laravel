@@ -31,3 +31,9 @@ $("#forgot-password-link").on("click",function(e){
      $('#detail').hide();
  }) ;
 
+
+window.setQty =function(id,max) {
+    var elm = document.getElementById(id);
+    elm.value = Math.max(Math.min(elm.value, max) ,1);
+}
+
