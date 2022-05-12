@@ -10,7 +10,8 @@ class AdminController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware(['auth:admin'], ['except' => ['showAdminLoginForm', 'adminLogin']]);
+        $this->middleware(['admin'], ['except' => ['showAdminLoginForm', 'adminLogin']]);
+        $this->middleware('guest:admin', ['only' => ['showAdminLoginForm', 'adminLogin']]);
 
     }
 
@@ -18,7 +19,7 @@ class AdminController extends Controller
         // dd('dfgd');
         return view("admin.index")->with([
             "products" => Product::all(),
-            "orders" => Order::all()
+            "orders" => Order::all(),
         ]);
     }
     public function showAdminLoginForm(){
@@ -49,9 +50,14 @@ class AdminController extends Controller
 
     }
     public function getOrders(){
+        // return (Order::with("user")->get());
         return view("admin.orders.index")->with([
-            "orders" => Order::latest()->paginate(5)
+            "orders" => Order::with("user")->paginate(5),
+
         ]);
+
+    }
+    public function deleteOrders() {
 
     }
 }

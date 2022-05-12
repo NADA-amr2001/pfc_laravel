@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
+use Illuminate\Http\Request;
 class OrderController extends Controller
 {
+    public function __construct(){
+        // $this->middleware(['auth'], ['except' => []]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +22,7 @@ class OrderController extends Controller
     public function index()
     {
         //
+        // Order::with("user")->all();
     }
 
     /**
@@ -34,9 +41,38 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(Request $request)
     {
         //
+
+
+        $order = new Order();
+        $order->total = 0;
+        $cart = \Cart::getContent();
+        foreach ($cart as $item){
+            $product = Product::find($item["id"]);
+            $product->in_stock = $product->in_stock-min($item["quantity"],$product->in_stock);
+            $product->save();
+
+            $order->product_name .= $product->title ."x(".$item["quantity"] .") | ";
+            $order->total += $item["price"]*$item["quantity"];
+            $order->user_id =$request->user()->id;
+
+        }
+
+
+        $order->qty = 0;
+        $order->price = 0;
+        $order->save();
+        \Cart::clear();
+        // return $cart;
+        // dd(\Cart::getContent());
+        return redirect('/?message=your order has been created!');
+
+        // return view("welcome")->with([
+        //     "info" => "your order has been created!",
+        // ]);
+
     }
 
     /**

@@ -67,7 +67,7 @@
                                 @if (count($items) == 0)
                                 <td><a href="#" class="btn btn-success btn-block">NO checkout <i class="fa fa-angle-right"></i></a></td>
                                 @else
-                                <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                <td><form method="POST" action="/createOrders">@csrf <button type="submit" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></button></form></td>
                                 @endif
                             </td>
 						</tr>

@@ -53,11 +53,11 @@
                                     <i class="fa fa-check"></i>
                                 </button>
                               </form>
-                              <form id=" {{ $order->id }} "  method="POST" action="{{ route("orders.desctroy",$order->id) }}">
+                              <form id=" {{ $order->id }} "  method="POST" action="{{ route("orders.destroy",$order->id) }}">
                                 @csrf
                                 @method("DELETE")
                                 <button onclick="event.preventDefault();
-                                                  if(confirm('Voulez vous vraiment supprimer la commande {{ $order->id }} ?'))
+                                                  if(confirm('Do you really want to delete the order {{ $order->id }} ?'))
                                                         document.getElementById({{ $order->id }}).submit"
                                         class="btn btn-sm btn-success">
                                     <i class="fa fa-trash"></i>

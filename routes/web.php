@@ -71,12 +71,20 @@ Route::put('/update/{product}/cart', [App\Http\Controllers\CartController::class
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/login', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login');
-Route::get('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
+Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
 Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
+Route::delete('/admin/orders', [App\Http\Controllers\AdminController::class, 'deleteOrders'])->name('orders.destroy');
+
+Route::post('/user/logout', function() {
+    auth()->guard('web')->logout();
+    return  redirect("/");
+})->name("user.logout");
 
 //orders routes
-Route::resource('orders', 'OrderController');
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+Route::post('/createOrders', [App\Http\Controllers\OrderController::class, 'store'])->middleware('auth');
+
 
 //payment routes
 Route::get('/handle-payment', [App\Http\Controllers\PaypalpaymentController::class, 'handlepayment'])->name('make.payment');
@@ -101,3 +109,10 @@ Route::get('/admin', [AdminController::class, 'adminLogout']);*/
 
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
+
+Route::get('/login', function () {
+    return view('welcome');
+})->name('login');
+Route::get('/register', function () {
+    return view('welcome');
+})->name('register');

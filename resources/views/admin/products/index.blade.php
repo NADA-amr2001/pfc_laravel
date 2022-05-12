@@ -39,6 +39,18 @@
                           </td>
                           <td> <img src="{{ $product->image }}" alt="{{ $product->title }}" width="50" height="50" class="img-fluid rounded"> </td>
                           <td> {{ $product->category->title }} </td>
+                          <td>
+                            <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
+                                @csrf
+                                @method("DELETE")
+                                <button onclick="event.preventDefault();
+                                                  if(confirm('Do you really want to delete the product ! {{ $product->title }} ?'))
+                                                        document.getElementById({{ $product->id }}).submit"
+                                        class="btn btn-sm btn-success">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                              </form>
+                          </td>
                       </tr>
                    @endforeach
                 </tbody>

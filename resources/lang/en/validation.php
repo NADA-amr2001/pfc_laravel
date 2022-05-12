@@ -142,8 +142,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'title' => [
+            'required' => 'Please enter the title',
+            'min' => 'the title field must have at least :min characteres'
         ],
     ],
 
