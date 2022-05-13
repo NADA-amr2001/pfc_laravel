@@ -4,18 +4,16 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-2">
              @include('layouts.sidebar')
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <table class="table table-hover" >
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>customer</th>
                         <th>Product</th>
-                        <th>Qty</th>
-                        <th>Price</th>
                         <th>Total</th>
                         <th>paid</th>
                         <th>Livery</th>
@@ -28,8 +26,6 @@
                           <td> {{ $order->id }} </td>
                           <td> {{ $order->user->name }} </td>
                           <td> {{ $order->product_name }} </td>
-                          <td> {{ $order->qty }} </td>
-                          <td> {{ $order->price }} DA</td>
                           <td> {{ $order->total }} DA </td>
                           <td>
                              @if ($order->paid)
@@ -53,13 +49,15 @@
                                     <i class="fa fa-check"></i>
                                 </button>
                               </form>
+                          </td>
+                          <td>
                               <form id=" {{ $order->id }} "  method="POST" action="{{ route("orders.destroy",$order->id) }}">
                                 @csrf
                                 @method("DELETE")
                                 <button onclick="event.preventDefault();
                                                   if(confirm('Do you really want to delete the order {{ $order->id }} ?'))
                                                         document.getElementById({{ $order->id }}).submit"
-                                        class="btn btn-sm btn-success">
+                                        class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
                               </form>

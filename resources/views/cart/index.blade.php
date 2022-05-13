@@ -74,14 +74,20 @@
 					</tfoot>
 				</table>
 
-                @if (Cart::getSubtotal() > 0 )
+                {{-- @if (Cart::getSubtotal() > 0 )
                 <div class="form-group">
                     <a href="{{ route("make.payment")  }}" class="btn btn-primary mt-3">
                        Payer {{ Cart::getSubtotal()  }} DA via paypal
                     </a>
                 </div>
 
-                @endif
+                @endif --}}
+                <form action="{{route('index.paypal')}}" method="post" >
+                    @csrf
+                  <div class="row">
+                      <button type="submit" class="btn btn-success">payment</button>
+                  </div>
+                </form>
 
 </div>
 

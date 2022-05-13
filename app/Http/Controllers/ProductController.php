@@ -27,10 +27,6 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','seller'], ['only' => ['create', 'store']]);
-
-        // $this->middleware("auth:admin")->except([
-        //        "index","show"
-        //  ]);
     }
 
      /**
@@ -56,9 +52,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
-        return view('products.create');
-         //return view("admin.products.create")->with(["categories" => Category::all()]);
+            return view('products.create');
 
     }
 
@@ -146,6 +140,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+
     }
     public function search(){
          $q = request()->input('q');

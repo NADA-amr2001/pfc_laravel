@@ -58,6 +58,10 @@ class AdminController extends Controller
 
     }
     public function deleteOrders() {
+        
+
+    }
+    public function deleteProducts() {
 
     }
 }

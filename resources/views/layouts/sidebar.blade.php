@@ -1,4 +1,4 @@
-<ul class="list-group mb-3">
+<ul class="list-group mb-3" style="display:inline-block">
     <a href=" {{ route("admin.products")}} " class="list-group-item font-weight-bold list-group-item-action">
         <i class="fa fa-list"></i>
         Products

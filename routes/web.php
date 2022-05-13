@@ -50,6 +50,8 @@ Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class,
 //Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 
 
+
+
 //seller
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
@@ -74,7 +76,10 @@ Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'admin
 Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
 Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
-Route::delete('/admin/orders', [App\Http\Controllers\AdminController::class, 'deleteOrders'])->name('orders.destroy');
+// Route::delete('/admin/orders', [App\Http\Controllers\AdminController::class, 'destroy'])->name('orders.destroy');
+// Route::delete('/admin/products', [App\Http\Controllers\AdminController::class, 'deleteProducts'])->name('products.destroy');
+Route::delete('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'destroy'])->name('products.destroy');
+//Route::post('/createOrders', [App\Http\Controllers\OrderController::class, 'store'])->middleware('auth');
 
 Route::post('/user/logout', function() {
     auth()->guard('web')->logout();
@@ -87,9 +92,12 @@ Route::post('/createOrders', [App\Http\Controllers\OrderController::class, 'stor
 
 
 //payment routes
-Route::get('/handle-payment', [App\Http\Controllers\PaypalpaymentController::class, 'handlepayment'])->name('make.payment');
-Route::get('/cancel-payment', [App\Http\Controllers\PaypalpaymentController::class, 'paymentCancel'])->name('cancel.payment');
-Route::get('/payment-success', [App\Http\Controllers\PaypalpaymentController::class, 'paymentSuccess'])->name('success.payment');
+// Route::get('/handle-payment', [App\Http\Controllers\PaypalpaymentController::class, 'handlepayment'])->name('make.payment');
+// Route::get('/cancel-payment', [App\Http\Controllers\PaypalpaymentController::class, 'paymentCancel'])->name('cancel.payment');
+// Route::get('/payment-success', [App\Http\Controllers\PaypalpaymentController::class, 'paymentSuccess'])->name('success.payment');
+Route::post('/Paypal', [App\Http\Controllers\PaypalController::class, 'index'])->name('index.paypal');
+Route::get('/Paypal/return', [App\Http\Controllers\PaypalController::class, 'paypalreturn'])->name('return.paypal');
+Route::get('/Paypal/cancel', [App\Http\Controllers\PaypalController::class, 'paypalcancel'])->name('cancel.paypal');
 
 //contact us
 Route::get('/contact-us', [ContactController::class, 'index']);

@@ -108,16 +108,17 @@ color: #60a3bc;
     transition: 0.3 ease;
 }
 #bar{
-    font-size: 2.8rem;
+    font-size: 3.8rem;
     padding: 7px;
     cursor: pointer;
     font-weight: 500;
     transition: 0.3s ease;
     color: #666666;
+    background-color: #60a3bc;
 }
 #bar:hover,
 #bar.active{
-    color: #60a3bc;
+    color:white;
 }
 
 /*mobile nav*/
@@ -131,7 +132,7 @@ color: #60a3bc;
     height: 2px;
     background-color: #fb774b;
 }
-@media only screen and (max-width: 991px){
+@media only screen and (max-width: 1500px){
     body>nav>div>button:hover,
     body>nav>div>button.focus{
         background-color: #ada9a9;
@@ -191,6 +192,9 @@ color: #60a3bc;
     font-size: 20px;
     transition: 0.4s;
     line-height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
     width: 200px;
 }
 #search-shop-txt{

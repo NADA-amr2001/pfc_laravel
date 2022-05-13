@@ -1,4 +1,5 @@
-{{-- @extends('layouts.app')
+
+@extends('layouts.app')
 
 @section('content')
 <div class="d-flex justify-content-center h-100">
@@ -22,39 +23,30 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center form_container">
-                            <form style="width: 200px;" method="POST" action="{{ route("products.store")}}" enctype="multipart/form-data">
+                            <form style="width: 200px;" method="POST" action="{{ route("products.update",$product->id)}}" enctype="multipart/form-data">
                                 @csrf
+                                @method("PUT")
                                 <div class="input-group mb-2 mt-2">
-                                    <input id="title" type="text"
-                                        class="form-control input_pass input_user @error('title') is-invalid @enderror"
+                                    <input type="text"
+                                        class="form-control "
                                         placeholder="Tilte" name="title"
-                                        value="{{ old('title') }}" required autocomplete="title"
-                                        autofocus>
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        value="{{ $product->title }}">
                                 </div>
                                 <div class="input-group mb-2">
-                                    <input id="desc" type="text" class="form-control input_pass"
+                                    <input  type="text" class="form-control input_pass"
                                         placeholder="Description" name="description"
-                                        value="{{ old('description') }}" required
-                                        autocomplete="description">
+                                        value="{{ $product->description }}" cols="15" rows="5">
                                 </div>
                                 <div class="input-group mb-2">
-                                    <input id="price" type="number" placeholder="price"
-                                        class="form-control" name="price" required
-                                        autocomplete="price">
+                                    <input type="number" placeholder="price"
+                                        class="form-control" name="price" value="{{ $product->price }}">
                                 </div>
                                 <div class="input-group mb-2">
-                                    <input id="qty" type="number" placeholder="quantity"
-                                        class="form-control" name="qty" required
-                                        autocomplete="number">
+                                    <input type="number" placeholder="quantity in stock"
+                                        class="form-control" name="qty" value="{{ $product->in_stock }}">
                                 </div>
                                 <div class="input-group mb-2">
-                                    <input id="image" type="file" class="form-control"
-                                        name="image" required>
+                                    <img src="{{ asset($product->image) }}" width="100" height="100" alt="{{ $product->title }}" type="file"name="image">
                                 </div>
 
                                 <div class="input-group mb-2">
@@ -65,11 +57,8 @@
                                             $categories = App\Models\Category::all();
                                         @endphp
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">
-                                                {{ $category->title }}</option>
+                                           <option {{ $product->category_id === $category->id ? "selected" : "" }} value="{{ $category->id }}" >{{ $category->title }}</option>
                                         @endforeach
-
-
                                     </select>
                                 </div>
 
@@ -87,4 +76,4 @@
         </div>
     </div>
 </div>
-@endsection --}}
+@endsection

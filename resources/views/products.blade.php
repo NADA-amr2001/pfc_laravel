@@ -14,6 +14,16 @@
                         <p class="card-text">{{ $product->price }} DA</p>
                         <a id="detail-btn" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
                             data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn ">Details</a>
+                            {{-- <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
+                                @csrf
+                                @method("DELETE")
+                                <button onclick="event.preventDefault();
+                                                  if(confirm('Do you really want to delete the product {{ $product->id }} ?'))
+                                                        document.getElementById({{ $product->id }}).submit"
+                                        class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                              </form> --}}
                     </div>
                 </div>
             @endforeach
@@ -92,7 +102,7 @@
 
                                             <div>
                                                 @auth
-                                                <button type="submit" id="add" class="add-to-cart "
+                                                <button type="submit" id="add" class="add-to-cart btn "
                                                    ><i class="fa fa-shopping-cart"></i> Add To
                                                     Cart</button>
                                                 <button type="button" id="like" style="background: none; "

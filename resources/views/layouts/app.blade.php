@@ -56,7 +56,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top ">
             <div class="container">
                 <img id="navlogo" href="{{ url('/') }}" src="/image/logo@2x.png" alt="logo">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button style="background: #60a3bc" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span id="bar" class="fas fa-bars"></span>
@@ -72,13 +72,14 @@
                         <li class="nav-item">
                             <a style="margin-top: 10px;" class="nav-link active" href="/">Home</a>
                         </li>
+                        {{-- @if (Auth::guest() && Auth::user()) --}}
                         @php
 
                             $categories = App\Models\Category::all();
                         @endphp
                         <li class="nav-item">
                             <div class="dropdown me-2">
-                                <a style="margin-top: 10px;" class="nav-link dropdown-toggle" href="#"
+                                <a style="margin-top: 8px;" class="nav-link dropdown-toggle" href="#"
                                     id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false"
                                     data-bs-offset="10,20">Shop</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
@@ -94,17 +95,20 @@
                                 </ul>
                             </div>
                         </li>
+                        {{-- @endif --}}
                         <li class="nav-item">
                             <a style="margin-top: 10px;" class="nav-link" href="/#services">Our Services</a>
                         </li>
                         <li class="nav-item">
                             <a style="margin-top: 10px;" class="nav-link" href="/#about">About Us</a>
                         </li>
+                        {{-- @if (Auth::guest() && Auth::user()) --}}
                         <li class="nav-item">
                             <a style="margin-top: 10px;" class="nav-link" id="contact-btn" data-toggle="modal"
                                 data-target="#contact" data-bs-target="#contact" role="tab" href="#contact">Contact
                                 Us</a>
                         </li>
+                        {{-- @endif --}}
                         @if (!Auth::guest() && Auth::user()->type == 1)
                             <li class="nav-item">
                                 <div class="dropdown me-2">
@@ -122,10 +126,26 @@
                                 </div>
                             </li>
                         @endif
+                        @if (Auth::guard('admin')->check())
+                         <li class="nav-item">
+                            <div class="dropdown me-2">
+                                <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset"
+                                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20"><i
+                                        style="font-size: 30px !important;" class="bi bi-plus-circle"></i></a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                    <li><a class="dropdown-item" id="add_category-btn" data-toggle="modal"
+                                            data-target="#add_category" data-bs-target="#add_category" role="tab" href="#add">Add
+                                            category</a></li>
+
+                            </div>
+                         </li>
+                        @endif
+
 
 
                 <li class="nav-item">
-                    <a style="font-size: 30px !important;" href="/cart" class="bi bi-cart2"></a>
+                    <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown me-2">
@@ -135,7 +155,7 @@
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             @guest
-                                <small>GUEST</small>
+                                {{-- <small>GUEST</small> --}}
 
                                 <li><a class="dropdown-item" id="login-btn" data-toggle="modal" data-target="#login"
                                         data-bs-target="#login" role="tab" href="#login">LOG IN</a></li>
@@ -151,16 +171,19 @@
                                         @endif --}}
                             @endguest
                                 @if (Auth::guard('admin')->check())
-                                    <small>ADMIN</small>
+                                     <small>{{ auth()->guard("admin")->user()->name }} </small>
+                                    {{-- <li><a class="dropdown-item" href="" >{{ auth()->guard("admin")->user()->name }} </a></li> --}}
+                                        <li><a class="dropdown-item" href="{{ route('admin.index') }}">Dashbord</a></li>
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();"
-                                            href="{{ route('admin.logout') }}">Log Out ADMIN</a></li>
+                                            href="{{ route('admin.logout') }}">ADMIN Log Out </a></li>
                                 @endif
                                 @if (Auth::guard('web')->check())
-                                    <small>{{ Auth::user()->type ==1?'SELLER':'BAYER' }}</small>
+                                    {{-- <small>{{ Auth::user()->name }}</small> --}}
+                                    <li><a class="dropdown-item" href="">{{ Auth::user()->name }}</a></li>
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('user-logout-form').submit();"
-                                            href="{{ route('logout') }}">Log Out USER</a></li>
+                                            href="{{ route('logout') }}">Log Out</a></li>
                                 @endif
                         </ul>
                         <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
@@ -221,7 +244,7 @@
                                             <form style="width: 200px;" method="POST" action="/products"
                                                 enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="input-group mb-2 mt-2">
+                                                <div class="input-group mb-2 ">
                                                     <input id="title" type="text"
                                                         class="form-control input_pass input_user @error('title') is-invalid @enderror"
                                                         placeholder="Tilte" name="title" value="{{ old('title') }}"
@@ -254,7 +277,7 @@
                                                 </div>
 
                                                 <div class="input-group mb-2">
-                                                    <select required class="form-select" name="category_id"
+                                                    <select style="height:35px; width:200px" required class="form-select" name="category_id"
                                                         aria-label="Default select example">
                                                         <option disabled selected>Select the category</option>
                                                         @php
@@ -289,7 +312,7 @@
     </div>
 
     <!--add category-->
-    <div class="modal fade " id="add-category">
+    <div class="modal fade " id="add_category">
         <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
             <div class="modal-content user_card">
 
@@ -360,7 +383,7 @@
             <div class="footer-one col-lg-4 col-md-6 col-12">
                 <img style="margin-bottom: 20px; font-size: 100px;" id="navlogo" src="/image/footer@2x.png" alt="logo">
                 <p>Hello and welcome to M-Rare Store, the place to find the best medicines, foods and all the
-                    supplies of rare diseases.</p>
+                    parapharmacy of rare diseases.</p>
 
             </div>
             <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -370,35 +393,33 @@
                 <ul class="text-uppercase list-unstyled">
                     <li><a href="#homme">
                             <p>Homme</p>
-                        </a></li>
+                        </a>
+                    </li>
                     <li>
                         <div class="btn-group">
                             <a class="dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <p>Shop</p>
                             </a>
-                            <ul style="background-color: #60a3bc;" class="dropdown-menu">
-                                <li><a class="dropdown-item" id="medic-btn" href="http://127.0.0.1:8000/medicines">
-                                        <p>Medicines</p>
-                                    </a></li>
-                                <li><a class="dropdown-item" id="food-btn" href="http://127.0.0.1:8000/food">
-                                        <p>Food</p>
-                                    </a></li>
-                                <li><a class="dropdown-item" id="equip-btn" href="http://127.0.0.1:8000/equipements">
-                                        <p>Equipements</p>
-                                    </a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                @foreach ($categories as $category)
+                                    <li><a class="dropdown-item" id="medic-btn"
+                                            href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">
+                    <li><a href="#services">
                             <p>Our Services</p>
-                        </a></li>
-                    <li><a href="#about">
-                            <p>About Us</p>
-                        </a></li>
-                    <li><a href="#">
-                            <p>Contact Us</p>
-                        </a></li>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about"><p>About Us</p></a>
+                    </li>
+                    <li>
+                        <a  id="contact-btn" data-toggle="modal" data-target="#contact" data-bs-target="#contact" role="tab" href="#contact"><p>Contact Us</p></a>
+                    </li>
                 </ul>
 
             </div>
@@ -463,7 +484,6 @@
     <div class="modal fade " id="login">
         <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
             <div class="modal-content user_card">
-
                 <div class="modal-body">
                     <div class="d-flex justify-content-center h-100">
                         <div class="">
@@ -475,33 +495,33 @@
                             <div class="d-flex justify-content-center form_container">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 mt-3">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        </div>
+
                                         <input id="email" type="email" placeholder="Email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                      </div>
+                                     @error('email')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                     @enderror
                                     </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                        </div>
+
                                         <input id="password" placeholder="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror"
                                             name="password" required autocomplete="current-password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                      </div>
+                                      @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
@@ -562,69 +582,75 @@
                                 <div class="d-flex justify-content-center form_container">
                                     <form style="width: 200px;" method="POST" action="{{ route('register') }}">
                                         @csrf
-                                        <div class="input-group mb-2 mt-2">
+                                        <div class="input-group mb-3 mt-2">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
+
                                             <input id="name" type="text"
                                                 class="form-control input_pass input_user @error('name') is-invalid @enderror"
                                                 placeholder="Name" name="name" value="{{ old('name') }}" required
                                                 autocomplete="name" autofocus>
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+
+                                          </div>
+                                          @error('name')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                         @enderror
                                         </div>
-                                        <div class="input-group mb-2">
+                                        <div class="input-group mb-3">
                                             <div class="input-group-append">
-                                                <span class="input-group-text"><i
-                                                        class="bi bi-envelope-fill"></i></span>
-                                            </div>
+                                                <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+
                                             <input id="email" type="email"
                                                 class="form-control input_pass @error('email') is-invalid @enderror"
                                                 placeholder="E-mail Adress" name="email" value="{{ old('email') }}"
                                                 required autocomplete="email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+
+                                          </div>
+                                          @error('email')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
                                         </div>
-                                        <div class="input-group mb-2">
+                                        <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                            </div>
+
                                             <input id="password" type="password" placeholder="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password" required autocomplete="new-password">
-                                            @error('password')
+
+                                          </div>
+                                          @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="input-group mb-2">
+                                        <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                            </div>
+
                                             <input id="password-confirm" type="password" placeholder="Confirm password"
                                                 class="form-control" name="password_confirmation" required
                                                 autocomplete="new-password">
+                                         </div>
                                         </div>
 
                                         <div class="input-group mb-2">
-                                            <select class="form-select" name="type"
+                                            <select style="height:35px; width:200px" class="form-select" name="type"
                                                 aria-label="Default select example">
-                                                <option selected>Seller Or Buyer</option>
+                                                <option selected>      Seller Or Buyer</option>
                                                 <option value="0">Buyer</option>
                                                 <option value="1">Seller</option>
                                             </select>
                                         </div>
+                                        <br>
 
                                         <div class="d-flex justify-content-center mt-3 login_container">
-                                            <button type="submit" name="button"
-                                                class="btn login_btn">{{ __('Sign Up') }}</button>
+                                            <button type="submit" name="button" class="btn login_btn">{{ __('Sign Up') }}</button>
                                         </div>
                                     </form>
                                 </div>
