@@ -131,9 +131,11 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, $id)
     {
         //
+        dd($product->id);
+
         $this->validate(request(), [
             'title' => 'required|min:3',
             'description' => 'required|min:5',
@@ -144,7 +146,9 @@ class AdminProductController extends Controller
 
          ]);
 
+         //dd($product->id);
 
+         $product = Product::findOrfail($id);
         //update data
         if($request->has("image")){
             $image_path = public_path("images/products".$product->image);
@@ -181,9 +185,12 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        //dd(id);
         //delete data
+
+        $product = Product::findOrfail($id);
 
             $image_path = public_path("images/products".$product->image);
             if(File::exists($image_path)){
@@ -191,17 +198,19 @@ class AdminProductController extends Controller
             }
 
 
-            // $product->delete();
-            // return redirect()->route("admin.products")->withSucces("Deleted Product");
+           // dd($product);
+             $product->delete();
+             return redirect()->route("admin.products")->with("delete", "Product has been deleted");
+
 
              // Delete the product
          // Product::destroy($id);
 
           // Store a message
-          session()->flash('msg','Product has been deleted');
+          //session()->flash('msg','Product has been deleted');
 
           // Redirect back
-          return redirect('admin/products');
+          //return redirect('admin/products');
     }
 
 

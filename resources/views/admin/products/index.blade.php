@@ -3,6 +3,9 @@
 
 @section('content')
 <div class="container">
+    @if(Session::has('delete'))
+        <p style="width: 200px; align-item: center; justify-content: center; margin-left: 450px" class="alert alert-danger">{{ Session::get('delete') }}</p>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-2">
              @include('layouts.sidebar')
@@ -44,16 +47,14 @@
                           <td> {{ $product->category->title }} </td>
                           <td class="d-flex flex-row justify-content-center align-items-center">
                               <a href="{{ route("products.edit", $product->id) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit"></i></a>
-                            <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
+                            <form id=" {{ $product->id }} "  method="POST" action="{{ route("admin.products.destroy",$product->id) }}">
                                 @csrf
                                 @method("DELETE")
-                                <button onclick="event.preventDefault();
-                                                  if(confirm('Do you really want to delete the product ! {{ $product->title }} ?'))
-                                                        document.getElementById({{ $product->id }}).submit"
+                                <button type="submit" onclick="return confirm('are you sure you want to delete this product ?')"
                                         class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
-                              </form>
+                            </form>
                           </td>
                       </tr>
                    @endforeach

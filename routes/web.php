@@ -77,9 +77,9 @@ Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'admi
 Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
 // Route::delete('/admin/orders', [App\Http\Controllers\AdminController::class, 'destroy'])->name('orders.destroy');
-// Route::delete('/admin/products', [App\Http\Controllers\AdminController::class, 'deleteProducts'])->name('products.destroy');
-Route::delete('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'destroy'])->name('products.destroy');
-//Route::post('/createOrders', [App\Http\Controllers\OrderController::class, 'store'])->middleware('auth');
+Route::post('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'update'])->name('admin.products.update');
+Route::delete('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+//Route::post('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'edit'])->name('admin.products.edit');
 
 Route::post('/user/logout', function() {
     auth()->guard('web')->logout();
@@ -89,6 +89,8 @@ Route::post('/user/logout', function() {
 //orders routes
 Route::resource('orders', App\Http\Controllers\OrderController::class);
 Route::post('/createOrders', [App\Http\Controllers\OrderController::class, 'store'])->middleware('auth');
+Route::delete('/admin/orders/{id}', [App\Http\Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
+//Route::post('/admin/orders/{id}', [App\Http\Controllers\OrderController::class, 'update'])->name('orders.update');
 
 
 //payment routes

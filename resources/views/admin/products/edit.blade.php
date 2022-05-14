@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center form_container">
-                            <form style="width: 200px;" method="POST" action="{{ route("products.update",$product->id)}}" enctype="multipart/form-data">
+                            <form style="width: 200px;" method="POST" action="{{ route("admin.products.update",$product->id)}}" enctype="multipart/form-data">
                                 @csrf
                                 @method("PUT")
                                 <div class="input-group mb-2 mt-2">

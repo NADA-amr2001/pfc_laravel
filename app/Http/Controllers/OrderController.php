@@ -104,9 +104,12 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update($id)
     {
         //
+        dd($order->id);
+        $order = Order::findOrfail($id);
+       // dd($order);
         $order->update([
             "delivered" => 1
         ]);
@@ -119,10 +122,16 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy( $id)
     {
         //
+        //dd($product->id);
+
+        $order = Order::findOrfail($id);
+       // dd($order);
+
+
         $order->delete();
-         return redirect()->back()->withSuccess("order deleted");
+         return redirect()->back()->with("delete", "Order has been deleted");
     }
 }

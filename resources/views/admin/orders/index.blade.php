@@ -3,6 +3,9 @@
 
 @section('content')
 <div class="container">
+    @if(Session::has('delete'))
+        <p style="width: 200px; align-item: center; justify-content: center; margin-left: 450px" class="alert alert-danger">{{ Session::get('delete') }}</p>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-2">
              @include('layouts.sidebar')
@@ -36,7 +39,7 @@
                           </td>
                           <td>
                              @if ($order->delivered)
-                               <i class="fa fa-chack text-success"></i>
+                               <i class="fa fa-check text-success"></i>
                              @else
                               <i class="fa fa-times text-danger"></i>
                              @endif
@@ -45,7 +48,7 @@
                               <form method="POST" action="{{ route("orders.update",$order->id) }}">
                                 @csrf
                                 @method("PUT")
-                                <button class="btn btn-sm btn-success">
+                                <button type="submit" class="btn btn-sm btn-success">
                                     <i class="fa fa-check"></i>
                                 </button>
                               </form>
@@ -54,9 +57,7 @@
                               <form id=" {{ $order->id }} "  method="POST" action="{{ route("orders.destroy",$order->id) }}">
                                 @csrf
                                 @method("DELETE")
-                                <button onclick="event.preventDefault();
-                                                  if(confirm('Do you really want to delete the order {{ $order->id }} ?'))
-                                                        document.getElementById({{ $order->id }}).submit"
+                                <button type="submit" onclick="return confirm('are you sure you want to delete this order ?')"
                                         class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
