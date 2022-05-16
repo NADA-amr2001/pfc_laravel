@@ -11,6 +11,7 @@ class Product extends Model
     protected $fillable = [
         "title","description","price","old_price","image","in_stock","qty","category_id","user_id"
     ];
+    protected $with = ["user"];
     /*public function getRouteKeyName(){
         return "slug";
     }*/

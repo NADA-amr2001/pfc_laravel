@@ -8,22 +8,29 @@
                 <div class="card" onclick="openproduct()" id="buy-card">
                     <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
                         data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn "
-                        src="{{ $product->image }}" class="card-img-top" alt="{{ $product->title }}">
+                        src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->title }}</h5>
                         <p class="card-text">{{ $product->price }} DA</p>
-                        <a id="detail-btn" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
-                            data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn ">Details</a>
-                            {{-- <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
+
+                            @if (auth()->user()->id == $product->user_id)
+                             <div class="btn-container" style="display: flex;">
+                              <a id="detail-btn_{{ $product->id }}" data-toggle="modal" data-bs-target="#update-{{ $product->id }}"
+                                data-target="#update-{{ $product->id }}" role="tab" href="" class="btn "><i class="fa fa-edit"></i></a>
+                              <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
                                 @csrf
                                 @method("DELETE")
-                                <button onclick="event.preventDefault();
-                                                  if(confirm('Do you really want to delete the product {{ $product->id }} ?'))
-                                                        document.getElementById({{ $product->id }}).submit"
-                                        class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i>
+                                <button style="margin-left: 135px"  type="submit" onclick="return confirm('are you sure you want to delete this product ?')"
+                                      class="btn ">
+                                  <i class="fa fa-trash"></i>
                                 </button>
-                              </form> --}}
+                              </form>
+                             </div>
+                            @else
+                              <a id="detail-btn_{{ $product->id }}" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
+                                data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn ">Details</a>
+                           @endif
+
                     </div>
                 </div>
             @endforeach
@@ -33,8 +40,90 @@
             {{ $products->links() }}
         </div>
     </section>
+
+    <div class="modal fade " id="update">
+        <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
+            <div class="modal-content user_card">
+
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="">
+                            <div class="d-flex justify-content-center" style="margin-bottom: 30px">
+                                <div class="brand_logo_container">
+                                    <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                </div>
+                            </div>
+                            <div class="container h-100">
+                                <div class="d-flex justify-content-center h-100">
+                                    <div class="">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="brand_logo_container">
+                                                <img src="{{ asset($product->image) }}" class="brand_logo" alt="Logo">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center form_container">
+                                            <form style="width: 200px;" method="POST" action="/admin/products/{{$product->id}}" enctype="multipart/form-data">
+                                                @csrf
+                                                @method("PUT")
+                                                <div class="input-group mb-2 mt-2">
+                                                    <input type="text"
+                                                        class="form-control "
+                                                        placeholder="Tilte" name="title"
+                                                        value="{{ $product->title }}">
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <input  type="text" class="form-control input_pass"
+                                                        placeholder="Description" name="description"
+                                                        value="{{ $product->description }}" cols="15" rows="5">
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <input type="number" placeholder="price"
+                                                        class="form-control" name="price" value="{{ $product->price }}">
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <input type="number" placeholder="quantity in stock"
+                                                        class="form-control" name="qty" value="{{ $product->in_stock }}">
+                                                </div>
+
+                                                <div class="input-group mb-2">
+                                                    <input id="image" type="file" class="form-control" name="image">
+                                                </div>
+
+                                                <div class="input-group mb-2">
+                                                    <select required class="form-select" name="category_id"
+                                                        aria-label="Default select example">
+                                                        <option disabled selected>Select the category</option>
+                                                        @php
+                                                            $categories = App\Models\Category::all();
+                                                        @endphp
+                                                        @foreach ($categories as $category)
+                                                           <option {{ $product->category_id === $category->id ? "selected" : "" }} value="{{ $category->id }}" >{{ $category->title }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="d-flex justify-content-center mt-3 login_container">
+                                                    <button type="submit" name="button"
+                                                        class="btn login_btn">{{ __('Update Product') }}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     {{-- @include('partials.show') --}}
     @foreach ($products as $product)
+
         <div id="detail-{{ $product->id }}" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                 <div class="modal-content card " style="height: 100%; width: 100%" id="details">
@@ -49,7 +138,7 @@
                                     <div class="preview col-md-4">
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1"><img id="d-img"
-                                                    src="{{ $product->image }}" /></div>
+                                                    src="{{ asset($product->image) }}" /></div>
                                         </div>
                                     </div>
                                     <div class="details col-md-6">
@@ -108,6 +197,15 @@
                                                 <button type="button" id="like" style="background: none; "
                                                     class="like "><span style="font-size: 30px; margin-left: 30px;"
                                                         class="fa fa-heart"></span></button>
+
+                                                      {{-- <form  action="POST">
+                                                            @csrf
+                                                            @method("DELETE")
+                                                        <button type="submit" class="add-to-cart btn "
+                                                           ><i class="fa fa-shopping-delete"></i> Delete product</button>
+
+                                                       </form> --}}
+
 
                                                 @endauth
                                                 @guest

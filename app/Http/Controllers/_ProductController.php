@@ -219,18 +219,19 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
-    {
-         //delete data
-             $image_path = public_path("images/products/".$product->image);
-             if(File::exists()($image_path)){
-                 unlink($image_path);
-             }
+    // public function destroy(Product $product)
+    // {
+    //      //delete data
+    //          $image_path = public_path("images/products/".$product->image);
+    //          if(File::exists()($image_path)){
+    //              unlink($image_path);
+    //          }
 
-            $product->delete();
-            return redirect()->route("admin.products")->withSuccess("deleted product");
+    //         $product->delete();
+    //         return redirect()->route("admin.products")->withSuccess("deleted product");
 
-    }
+    // }
+    
     public function search(){
          $q = request()->input('q');
     $products=Product::where('title','like',"%$q%")

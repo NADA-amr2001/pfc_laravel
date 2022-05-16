@@ -61,8 +61,8 @@ class OrderController extends Controller
         }
 
 
-        $order->qty = 0;
-        $order->price = 0;
+        // $order->qty = 0;
+        // $order->price = 0;
         $order->save();
         \Cart::clear();
         // return $cart;
@@ -107,7 +107,7 @@ class OrderController extends Controller
     public function update($id)
     {
         //
-        dd($order->id);
+
         $order = Order::findOrfail($id);
        // dd($order);
         $order->update([

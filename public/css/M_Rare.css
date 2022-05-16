@@ -48,6 +48,7 @@
 #txt{
     background-image:url(/image/txt.png);
      color: white;
+     padding: 10px;
 }
 .carousel-caption a{
     text-transform: uppercase;
@@ -378,7 +379,21 @@ footer li a:hover{
     color: white;
     transition: 0.3s all;
 }
+#buy-card button{
+    background: #60a3bc;
+    transform: translateY(20px);
+    border: none;
+    opacity: 0;
+    border-bottom: 3px solid #fff;
+    border-color: #666666;
+    color: white;
+    transition: 0.3s all;
+}
 #buy-card:hover a{
+    transform: translateY(0px);
+    opacity: 1;
+}
+#buy-card:hover button{
     transform: translateY(0px);
     opacity: 1;
 }

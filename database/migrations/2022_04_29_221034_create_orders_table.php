@@ -15,11 +15,9 @@ class CreateOrdersTable extends Migration
     {
         if(!Schema::hasTable('orders')){
             Schema::create('orders', function (Blueprint $table) {
-                $table->increments('id');
+                $table->increments('id')->unsigned();
                 $table->bigInteger("user_id")->unsigned();
                 $table->string("product_name");
-                $table->integer("qty");
-                $table->double("price",8,2);
                 $table->double("total",8,2);
                 $table->boolean("paid")->default(0);
                 $table->boolean("delivered")->default(0);

@@ -1,3 +1,4 @@
+
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -41,7 +42,7 @@
         <link rel="stylesheet" Type="text/css" href="{{ asset('css/M_Rare.css') }}">
         <style>
             .label,.glyphicon { margin-right:5px; }
-            .card-body{
+            .btn{
                 background: #60a3bc;
              transform: translateY(20px);
               border: none;
@@ -85,38 +86,51 @@
       </div>
     </nav>
 
+<div class="container" style="margin-top:150px">
+    <div class="d-flex justify-content-center h-100">
+        <div class="">
+            <div class="d-flex justify-content-center" style="margin-bottom: 30px">
+                <div class="col-md-5">
+                    @include("layouts.sidebar")
+                </div>
+                <div class="col-md-7">
 
-    <div class="container" style="margin-top: 300px;">
-
-        <div class="row justify-content-center" >
-            <div class="col-md-6">
-                <div class="card">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                          <a href=" {{ route("admin.products")}} " class="btn" role="button" style=" text-decoration: none; color:#fff; font-size: 24px; width:550px; height:125px; margin-top:10px; align:center">
-
-                             <span  class="" > <i class="fa fa-list"></i> Products <br> <br>
-                                                     {{ $products->count() }}</p>
-                              </span>
-                           </a>
-                       </div>
+                            <div class="container h-100">
+                                <div class="d-flex justify-content-center h-100">
+                                    <div class="">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="brand_logo_container">
+                                                <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center form_container">
+                                            <form style="width: 200px;" method="POST" action="{{ route('admin.products.add_catg') }}" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="input-group mb-2 mt-2">
+                                                    <input id="title" type="text"
+                                                        class="form-control input_pass input_user @error('title') is-invalid @enderror"
+                                                        placeholder="Tilte" name="title" value="{{ old('title') }}"
+                                                        required autocomplete="title" autofocus>
+                                                    @error('title')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-3 login_container">
+                                                    <button type="submit" name="button"
+                                                        class="btn login_btn">{{ __('Add Category') }}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                          <a href=" {{ route("admin.orders")}} " class="btn" role="button" style=" text-decoration: none; color:#fff; font-size: 24px; width:550px; height:125px; margin-top:10px; align:center">
-
-                             <span  class="" > <i class="fa fa-list"></i> Orders <br> <br>
-                                {{ $orders->count() }}</p>
-                              </span>
-                           </a>
-                       </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
+</div>
 
   </body>
 </html>
@@ -125,9 +139,3 @@
 
 
 
-
-{{-- @extends('layouts.app')
-
-@section('content')
-
-@endsection --}}

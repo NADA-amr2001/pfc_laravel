@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -137,11 +138,39 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
-    {
-        //
+    // public function destroy(Product $product)
+    // {
+    //     //
 
+    // }
+    public function destroy($id)
+    {
+        //dd(id);
+        //delete data
+
+         $product = Product::findOrfail($id);
+
+            $image_path = public_path("images/products".$product->image);
+            if(File::exists($image_path)){
+                unlink($image_path);
+            }
+
+
+            // dd($product);
+             $product->delete();
+             return redirect("/")->with("delete", "Product has been deleted");
+
+
+             // Delete the product
+         // Product::destroy($id);
+
+          // Store a message
+          //session()->flash('msg','Product has been deleted');
+
+          // Redirect back
+          //return redirect('admin/products');
     }
+
     public function search(){
          $q = request()->input('q');
     $products=Product::where('title','like',"%$q%")

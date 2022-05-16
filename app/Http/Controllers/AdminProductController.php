@@ -44,6 +44,30 @@ class AdminProductController extends Controller
          return view("admin.products.create")->with(["categories" => Category::all()]);
 
     }
+    public function catg()
+    {
+         return view("admin.products.catg")->with(["categories" => Category::all()]);
+
+    }
+
+    public function add_catg(Request $request){
+        //return ('hhhhhhhh');
+       // dd($request);
+        $this->validate(request(), [
+            'title' => 'required|min:3',
+         ]);
+
+         $title = $request->title;
+
+            Category::create([
+                "title" => $title,
+            ]);
+             // Sessions Message
+         $request->session()->flash('msg','Category has been added');
+
+            // Redirect
+            return redirect('admin/products');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,8 +79,8 @@ class AdminProductController extends Controller
     {
     //     //
 
-    //    dd("request()->all()");
-    //    return "hhhh";
+       //  dd("request()->all()");
+      // return "hhhh";
 
         $this->validate(request(), [
             'title' => 'required|min:3',
@@ -80,7 +104,7 @@ class AdminProductController extends Controller
                 "title" => $title,
                 "description" => $request->description,
                 "price" => $request->price,
-                "in_stock" => $request->in_stock,
+                "in_stock" => $request->qty,
                 "category_id" => $request->category_id,
                 "image" => $imageName,
             ]);
@@ -88,7 +112,7 @@ class AdminProductController extends Controller
          $request->session()->flash('msg','Your product has been added');
 
             // Redirect
-            return redirect('admin/products/create');
+            return redirect('admin/products');
             //return redirect()->route("admin.products")->withSucces("Added Product");
         }
 
@@ -115,11 +139,11 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit( $id)
     {
         //
         return view("admin.products.edit")->with([
-            "product" => $product,
+            "product" => Product::find($id),
             "categories" => Category::all()
         ]);
     }
@@ -131,10 +155,10 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update($id)
     {
         //
-        dd($product->id);
+        $request = request();
 
         $this->validate(request(), [
             'title' => 'required|min:3',
@@ -151,9 +175,13 @@ class AdminProductController extends Controller
          $product = Product::findOrfail($id);
         //update data
         if($request->has("image")){
-            $image_path = public_path("images/products".$product->image);
+            $image_path = public_path($product->image);
             if(File::exists($image_path)){
+            try {
                 unlink($image_path);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
             }
             $file = $request->image;
             $imageName = "images/products/".time()."_".$file->getClientOriginalName();
@@ -166,7 +194,8 @@ class AdminProductController extends Controller
                 "title" => $title,
                 "description" => $request->description,
                 "price" => $request->price,
-                "in_stock" => $request->in_stock,
+                "in_stock" => $request->qty,
+                "qty" => $request->qty,
                 "category_id" => $request->category_id,
                 "image" =>  $product->image,
             ]);

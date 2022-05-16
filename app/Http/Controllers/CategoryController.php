@@ -69,7 +69,7 @@ class CategoryController extends Controller
             // $category = Category::findOrfail($id);
 
             return view('products')->with([
-                "products" => $category->products()->paginate(10),
+                "products" => $category->products()->with('user')->paginate(10),
                 "categories" =>Category::has("products.user")->get(),
             ]);
     }

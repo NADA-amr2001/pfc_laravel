@@ -62,7 +62,7 @@
                     <span id="bar" class="fas fa-bars"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="visibility: visible;">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a id="rech-btn" class="nav-link" data-toggle="modal" data-bs-target="#rech" role="tab"
@@ -126,7 +126,7 @@
                                 </div>
                             </li>
                         @endif
-                        @if (Auth::guard('admin')->check())
+                        {{-- @if (Auth::guard('admin')->check())
                          <li class="nav-item">
                             <div class="dropdown me-2">
                                 <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset"
@@ -140,10 +140,7 @@
 
                             </div>
                          </li>
-                        @endif
-
-
-
+                        @endif --}}
                 <li class="nav-item">
                     <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
                 </li>
@@ -170,14 +167,14 @@
                                             </li>
                                         @endif --}}
                             @endguest
-                                @if (Auth::guard('admin')->check())
+                                {{-- @if (Auth::guard('admin')->check())
                                      <small>{{ auth()->guard("admin")->user()->name }} </small>
                                     {{-- <li><a class="dropdown-item" href="" >{{ auth()->guard("admin")->user()->name }} </a></li> --}}
-                                        <li><a class="dropdown-item" href="{{ route('admin.index') }}">Dashbord</a></li>
+                                        {{-- <li><a class="dropdown-item" href="{{ route('admin.index') }}">Dashbord</a></li>
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();"
                                             href="{{ route('admin.logout') }}">ADMIN Log Out </a></li>
-                                @endif
+                                @endif --}}
                                 @if (Auth::guard('web')->check())
                                     {{-- <small>{{ Auth::user()->name }}</small> --}}
                                     <li><a class="dropdown-item" href="">{{ Auth::user()->name }}</a></li>
@@ -186,9 +183,9 @@
                                             href="{{ route('logout') }}">Log Out</a></li>
                                 @endif
                         </ul>
-                        <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        {{-- <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form>
+                        </form> --}}
                         <form id="user-logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -311,60 +308,6 @@
         </div>
     </div>
 
-    <!--add category-->
-    <div class="modal fade " id="add_category">
-        <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
-            <div class="modal-content user_card">
-
-                <div class="modal-body">
-                    <div class="d-flex justify-content-center h-100">
-                        <div class="">
-                            <div class="d-flex justify-content-center" style="margin-bottom: 30px">
-                                <div class="brand_logo_container">
-                                    <img src="\image\mrare.png" class="brand_logo" alt="Logo">
-                                </div>
-                            </div>
-                            <div class="container h-100">
-                                <div class="d-flex justify-content-center h-100">
-                                    <div class="">
-                                        <div class="d-flex justify-content-center">
-                                            <div class="brand_logo_container">
-                                                <img src="\image\mrare.png" class="brand_logo" alt="Logo">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center form_container">
-                                            <form style="width: 200px;" method="POST" action="/categories"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="input-group mb-2 mt-2">
-                                                    <input id="title" type="text"
-                                                        class="form-control input_pass input_user @error('title') is-invalid @enderror"
-                                                        placeholder="Tilte" name="title" value="{{ old('title') }}"
-                                                        required autocomplete="title" autofocus>
-                                                    @error('title')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="d-flex justify-content-center mt-3 login_container">
-                                                    <button type="submit" name="button"
-                                                        class="btn login_btn">{{ __('Add Category') }}</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
-    </div>
     {{-- alerts --}}
     <div style="margin-top: 80px" class="row">
         <div class="div.col-md-8 mx-auto my-4">
@@ -391,14 +334,14 @@
                     <p>Navigation</p>
                 </h4>
                 <ul class="text-uppercase list-unstyled">
-                    <li><a href="#homme">
+                    <li><a href="#homme" style=" text-decoration: none; font-size: 12px;">
                             <p>Homme</p>
                         </a>
                     </li>
                     <li>
                         <div class="btn-group">
                             <a class="dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                                aria-expanded="false" style=" text-decoration: none; font-size: 12px;">
                                 <p>Shop</p>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
@@ -410,15 +353,15 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#services">
+                    <li><a href="#services" style=" text-decoration: none; font-size: 12px;">
                             <p>Our Services</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#about"><p>About Us</p></a>
+                        <a href="#about" style=" text-decoration: none; font-size: 12px;"><p>About Us</p></a>
                     </li>
                     <li>
-                        <a  id="contact-btn" data-toggle="modal" data-target="#contact" data-bs-target="#contact" role="tab" href="#contact"><p>Contact Us</p></a>
+                        <a style=" text-decoration: none; font-size: 12px;" id="contact-btn" data-toggle="modal" data-target="#contact" data-bs-target="#contact" role="tab" href="#contact"><p>Contact Us</p></a>
                     </li>
                 </ul>
 
