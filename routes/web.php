@@ -55,6 +55,8 @@ Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class,
 //seller
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
+
+Route::put('/products/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
 //Route::get('products/category/{category}',[App\Http\Controllers\ProductController::class, 'getProductByCategory'])->("category.products");
 // Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 

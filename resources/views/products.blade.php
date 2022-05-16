@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    <div class="modal fade " id="update">
+    <div class="modal fade " id="update-{{ $product->id }}">
         <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
             <div class="modal-content user_card">
 
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center form_container">
-                                            <form style="width: 200px;" method="POST" action="/admin/products/{{$product->id}}" enctype="multipart/form-data">
+                                            <form style="width: 200px;" method="POST" action="/products/{{$product->id}}" enctype="multipart/form-data">
                                                 @csrf
                                                 @method("PUT")
                                                 <div class="input-group mb-2 mt-2">
@@ -141,15 +141,15 @@
                                                     src="{{ asset($product->image) }}" /></div>
                                         </div>
                                     </div>
-                                    <div class="details col-md-6">
+                                    <div class="details col-md-8">
 
                                         <h2 class="product-title">{{ $product->title }}</h2>
                                         {{-- <span>{{ $product->category->title }}</span> --}}
                                         <p class="product-description">{{ $product->description }}</p>
                                         <h4 class="price">current price:<br> <span>{{ $product->price }}
                                                 DA</span></h4>
-                                        <h4 class="price">Seller Name:<br>
-                                            <h5>{{ $product->user->name }}  <a href="mailto:{{ $product->user->email }}">    Send Email</a></h5>
+                                        <h4 class="price">Seller Name:<br></h4>
+                                            {{-- <h5>{{ $product->user->name }}  <a href="mailto:{{ $product->user->email }}">    Send Email</a></h5> --}}
 
                                         <p class="vote"><strong>91%</strong> of buyers use this product!
                                             <strong>(87 votes)</strong></p>
