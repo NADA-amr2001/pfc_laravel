@@ -1,7 +1,8 @@
+
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<!------ Include the above in your HEAD tag ---------->
 
 
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 
 		<!-- bootstrap -->
 		<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="default">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 
 		<!-- theme -->
 		<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.0/bootstrap/bootstrap.min.css" rel="stylesheet" title="theme">
@@ -41,7 +43,7 @@
         <link rel="stylesheet" Type="text/css" href="{{ asset('css/M_Rare.css') }}">
         <style>
             .label,.glyphicon { margin-right:5px; }
-            .card-body{
+            #add_prod{
                 background: #60a3bc;
              transform: translateY(20px);
               border: none;
@@ -49,8 +51,8 @@
              border-color: #666666;
              color: white;
              transition: 0.3s all;
+             margin-bottom: 20px;
             }
-
         </style>
 
 	</head>
@@ -86,47 +88,59 @@
     </nav>
 
 
-    <div class="container" style="margin-top: 300px;">
+    <div class="container" style="margin-top:150px">
+        @if(Session::has('delete'))
+            <p style="width: 200px; align-item: center; justify-content: center; margin-left: 450px" class="alert alert-danger">{{ Session::get('delete') }}</p>
+        @endif
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                 @include('layouts.sidebar')
+            </div>
+            <div class="col-md-10">
 
-        <div class="row justify-content-center" >
-            <div class="col-md-4">
-                <div class="card">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                          <a href=" {{ route("admin.products")}} " class="btn" role="button" style=" text-decoration: none; color:#fff; font-size: 24px; width:350px; height:125px; margin-top:10px; align:center">
+                {{-- <a id="add_prod" href="/admin/products/create" class="btn  btn-lg my-2"><i class="fa fa-plus"></i></a> --}}
 
-                             <span  class="" > <i class="fa fa-list"></i> Products <br> <br>
-                                                     {{ $products->count() }}</p>
-                              </span>
-                           </a>
-                       </div>
+                <table class="table table-hover" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Adress</th>
+                            <th>Country</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach ($users as $user )
+                          <tr>
+                              <td> {{ $user->id }} </td>
+                              <td> <img src="{{ asset($user->image) }}" alt="{{ $user->name }}" width="60" height="60" class="img-fluid rounded"> </td>
+                              <td> {{ $user->name }} </td>
+                              <td> {{ $user->email }} </td>
+                              <td> {{ $user->adress }} </td>
+                              <td> {{ $user->country }} </td>
+
+                              <td>
+                                <form id=" {{ $user->id }} "  method="POST" action="{{ route("admin.users.destroy",$user->id) }}">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button type="submit" onclick="return confirm('are you sure you want to delete this user ?')"
+                                            class="btn btn-lg btn-danger">
+                                            <i class="bi bi-trash3"></i>
+                                    </button>
+                                </form>
+                              </td>
+                          </tr>
+                       @endforeach
+                    </tbody>
+                </table>
+                <hr>
+                <div class="justify-content-center d-flex">
+                    {{ $users->links()}}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                          <a href=" {{ route("admin.orders")}} " class="btn" role="button" style=" text-decoration: none; color:#fff; font-size: 24px; width:350px; height:125px; margin-top:10px; align:center">
-
-                             <span  class="" > <i class="fa fa-list"></i> Orders <br> <br>
-                                {{ $orders->count() }}</p>
-                              </span>
-                           </a>
-                       </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                          <a href=" {{ route("admin.users")}} " class="btn" role="button" style=" text-decoration: none; color:#fff; font-size: 24px; width:350px; height:125px; margin-top:10px; align:center">
-
-                             <span  class="" > <i class="fa fa-list"></i> Users <br> <br>
-                                {{ $users->count() }}</p>
-                              </span>
-                           </a>
-                       </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 
@@ -138,8 +152,6 @@
 
 
 
-{{-- @extends('layouts.app')
 
-@section('content')
 
-@endsection --}}
+

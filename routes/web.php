@@ -80,15 +80,23 @@ Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'admin
 Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
 Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
+Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
 // Route::delete('/admin/orders', [App\Http\Controllers\AdminController::class, 'destroy'])->name('orders.destroy');
 //Route::post('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'update'])->name('admin.products.update');
 Route::delete('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 Route::get('/admin/products/{id}/edit', [App\Http\Controllers\AdminProductController::class, 'edit'])->name('admin.products.edit');
 Route::put('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'update'])->name('admin.products.update');
-Route::get('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'create'])->name('admin.products.create');
-Route::post('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'store'])->name('admin.products.store');
+// Route::get('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'create'])->name('admin.products.create');
+// Route::post('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'store'])->name('admin.products.store');
 Route::get('/admin/products/catg', [App\Http\Controllers\AdminProductController::class, 'catg'])->name('admin.products.catg');
 Route::post('/admin/products', [App\Http\Controllers\AdminProductController::class, 'add_catg'])->name('admin.products.add_catg');
+//user admin
+Route::delete('/admin/users/{id}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+
+//profile
+Route::get('/Profile', [App\Http\Controllers\UserController::class, 'myprofile'])->name('Profile');
+Route::get('/myOrder', [App\Http\Controllers\UserController::class, 'myOrder'])->name('myOrder');
+Route::put('/Profile/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('Profile.update');
 
 Route::post('/user/logout', function() {
     auth()->guard('web')->logout();

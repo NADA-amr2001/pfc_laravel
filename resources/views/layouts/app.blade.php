@@ -141,14 +141,15 @@
                             </div>
                          </li>
                         @endif --}}
+                 @if (Auth::guard('web')->check())
                 <li class="nav-item">
                     <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <div class="dropdown me-2">
                         <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset"
-                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20"> <i
-                                style="font-size: 30px !important;  " class="bi bi-person-circle"></i> </a>
+                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">  <img  src="{{ url(Auth::user()->image ??'/uploads/profile/user.png') }}" style="width:40px; height:40px; font-size: 18px;  border-radius: 50%;"> </a>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             @guest
@@ -177,7 +178,8 @@
                                 @endif --}}
                                 @if (Auth::guard('web')->check())
                                     {{-- <small>{{ Auth::user()->name }}</small> --}}
-                                    <li><a class="dropdown-item" href="">{{ Auth::user()->name }}</a></li>
+                                    <li><a class="dropdown-item" href="/Profile/">{{ Auth::user()->name }}</a></li>
+                                    {{-- <li><a class="dropdown-item" href="/myOrder">My Order</a></li> --}}
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('user-logout-form').submit();"
                                             href="{{ route('logout') }}">Log Out</a></li>
@@ -224,7 +226,7 @@
                 <div class="modal-body">
                     <div class="d-flex justify-content-center h-100">
                         <div class="">
-                            <div class="d-flex justify-content-center" style="margin-bottom: 30px">
+                            <div class="d-flex justify-content-center" style="margin-bottom: 20px">
                                 <div class="brand_logo_container">
                                     <img src="\image\mrare.png" class="brand_logo" alt="Logo">
                                 </div>
@@ -732,11 +734,11 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label id="cont_l" for="form_fname">Firstname *</label>
+                                                            <label id="cont_l" for="form_fname">Firstname</label>
                                                             <input id="form_fname" type="text"
                                                                 class="form-control @error('fname') is-invalid @enderror"
                                                                 type="text" name="fname"
-                                                                placeholder="Please enter your firstname *"
+                                                                placeholder="Please enter your firstname "
                                                                 required="required" data-error="Firstname is required.">
                                                             @error('fname')
                                                                 <span class="invalid-feedback" role="alert">
@@ -747,11 +749,11 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label id="cont_l" for="form_lname">Lastname *</label>
+                                                            <label id="cont_l" for="form_lname">Lastname</label>
                                                             <input id="form_lname" type="text"
                                                                 class="form-control @error('lname') is-invalid @enderror"
                                                                 type="text" name="lname"
-                                                                placeholder="Please enter your last name *"
+                                                                placeholder="Please enter your last name "
                                                                 required="required"
                                                                 data-error="Last tname is required.">
                                                             @error('name')
@@ -765,11 +767,11 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label id="cont_l" for="form_email">Email *</label>
+                                                            <label id="cont_l" for="form_email">Email </label>
                                                             <input type="text"
                                                                 class="form-control @error('email') is-invalid @enderror"
                                                                 id="form_email" type="email" name="email"
-                                                                placeholder="Please enter your email *"
+                                                                placeholder="Please enter your email "
                                                                 required="required"
                                                                 data-error="Valid email is required.">
                                                             @error('email')
@@ -781,11 +783,11 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label id="cont_l" for="form_phone">Phone *</label>
+                                                            <label id="cont_l" for="form_phone">Phone </label>
                                                             <input type="text"
                                                                 class="form-control @error('phone') is-invalid @enderror"
                                                                 name="phone" id="form_phone"
-                                                                placeholder="Please enter your phone *"
+                                                                placeholder="Please enter your phone "
                                                                 required="required"
                                                                 data-error="Valid phone is required.">
                                                             @error('phone')

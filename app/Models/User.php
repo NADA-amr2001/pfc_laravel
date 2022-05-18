@@ -21,6 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'adress',
+        'phone',
+        'image',
         'password',
         'code',
         'active',
@@ -50,5 +53,8 @@ class User extends Authenticatable
     }
     public function products(){
         return $this->hasMany(Product::class);
+    }
+    public function users(){
+        return $this->hasMany(Order::class);
     }
 }

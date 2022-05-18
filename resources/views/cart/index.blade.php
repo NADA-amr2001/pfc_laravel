@@ -33,13 +33,18 @@
                                     <div class="form-group">
                                         <input type="number" onkeyup="setQty('qty-{{$item->id}}',{{ $item->associatedModel->in_stock}})" style="width: 80px" name="qty" id="qty-{{$item->id}}" value="{{$item->quantity }}" max="{{ $item->associatedModel->in_stock}}" min="1" class="form-control">
                                     </div>
+                                    {{-- <script>function setQty(qty-{{$item->id}} , {{ $item->associatedModel->in_stock}}){
+                                                     if(qty-{{$item->id}} > {{ $item->associatedModel->in_stock}}){
+                                                          alert("hiiiiiiiiiiiiiii");
+                                                       }
+                                                    }</script> --}}
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-sm btn-warning " ><i class="fa fa-edit"></i></button>
                                     </div>
                                  </form>
 
                                 @else
-                                 Not avalable!
+                                 Not available!
                                 @endif
 							</td>
 							<td data-th="Subtotal" class="text-center">{{ $item->associatedModel->price * $item->quantity}} DA</td>

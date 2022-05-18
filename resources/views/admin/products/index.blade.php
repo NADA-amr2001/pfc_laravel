@@ -98,7 +98,7 @@
             </div>
             <div class="col-md-10">
 
-                <a id="add_prod" href="/admin/products/create" class="btn  btn-lg my-2"><i class="fa fa-plus"></i></a>
+                {{-- <a id="add_prod" href="/admin/products/create" class="btn  btn-lg my-2"><i class="fa fa-plus"></i></a> --}}
 
                 <table class="table table-hover" >
                     <thead>

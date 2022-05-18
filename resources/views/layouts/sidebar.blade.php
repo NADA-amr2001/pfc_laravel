@@ -7,6 +7,10 @@
         <i class="fa fa-credit-card"></i>
         Orders
     </a>
+    <a href=" {{ route("admin.users")}} " class="list-group-item font-weight-bold list-group-item-action">
+        <i class="fa fa-user"></i>
+        Users
+    </a>
     <a id="add_category-btn" href="/admin/products/catg" class="list-group-item font-weight-bold list-group-item-action">
         <i class="fa fa-square-plus"></i>
         Add Category

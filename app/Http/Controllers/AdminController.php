@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
         return view("admin.index")->with([
             "products" => Product::all(),
             "orders" => Order::all(),
+            "users" => User::all(),
         ]);
     }
     public function showAdminLoginForm(){
@@ -41,7 +43,7 @@ class AdminController extends Controller
     }
     public function adminLogout(){
         auth()->guard("admin")->logout();
-        return redirect()->route("admin.login");
+        return redirect('/');
     }
     public function getProducts(){
         return view("admin.products.index")->with([
@@ -55,10 +57,17 @@ class AdminController extends Controller
             "orders" => Order::with("user")->paginate(5),
 
         ]);
-
     }
+
+       public function getUsers(){
+            return view("admin.users.index")->with([
+                "users" => User::latest()->paginate(5)
+
+        ]);
+    }
+
     public function deleteOrders() {
-        
+
 
     }
     public function deleteProducts() {
