@@ -88,8 +88,7 @@ class UserController extends Controller
 
         $this->validate(request(), [
             'name' => 'min:3',
-
-            'phone' => 'numeric|min:10',
+            
             'image' => 'image|mimes:png,jpg,jpeg|max:2048',
          ]);
 

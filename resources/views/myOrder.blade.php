@@ -21,14 +21,22 @@
                 </thead>
                 <tbody>
                    {{-- @foreach ($item as $item ) --}}
-                      {{-- <tr>
-                          <td> {{ Auth::user()->order->id }} </td>
-                          <td> {{ Auth::user()->order->product_name }} </td>
-                          <td> {{ Auth::user()->order->total }} </td>
-                          </td>
+                      <tr>
+                        @php
+                          $order = App\Models\Order::all();
+                        @endphp
 
-                          {{-- <td>
-                              <form id=" {{ $order->id }} "  method="POST" action="{{ route("orders.destroy",$order->id) }}">
+                        <td> {{ $order->id }} </td>
+                        <td> {{ $order->product_name }} </td>
+                        <td> {{ $order->total }} </td>
+
+
+                          {{-- <td> {{ Auth::user()->order->product_name }} </td>
+                          <td> {{ Auth::user()->order->total }} </td> --}}
+
+
+                           <td>
+                              <form id=" {{ $order->user->id }} "  method="POST" action="{{ route("orders.destroy",$order->user->id) }}">
                                 @csrf
                                 @method("DELETE")
                                 <button type="submit" onclick="return confirm('are you sure you want to delete this order ?')"
@@ -37,7 +45,7 @@
                                 </button>
                               </form>
                           </td>
-                      </tr> --}}
+                      </tr>
 
                    {{-- @endforeach --}}
                 </tbody>

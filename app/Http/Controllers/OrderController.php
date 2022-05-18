@@ -54,7 +54,7 @@ class OrderController extends Controller
             $product->in_stock = $product->in_stock-min($item["quantity"],$product->in_stock);
             $product->save();
 
-            $order->product_name .= $product->title ."x(".$item["quantity"] .") | ";
+            $order->product_name .= $product->title ."(".$item["quantity"] .") | ";
             $order->total += $item["price"]*$item["quantity"];
             $order->user_id =$request->user()->id;
 

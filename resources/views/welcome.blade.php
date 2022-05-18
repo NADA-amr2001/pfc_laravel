@@ -11,12 +11,12 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="image/homme@2x.png" class="d-block w-100" alt="...">
+              <img src="image/2x/welcome@2x.png" class="d-block w-100" alt="...">
               <div class="carousel-caption ">
-                <div class="txt" id="txt">
-                  <h5 class="animated bounceIbRight" style="animation-delay: 1s; ">Welcome to M-Rare Store</h5>
-                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s;">We have medicines, foods and all the supplies of rare diseases .</p>
-                </div>
+                {{-- <div class="txt" id="txt" style=" width: 300px; margin-bottom: 50px; margin-left: 60px; ">
+                  <h5 class="animated bounceIbRight" style="animation-delay: 1s; color:#ff6633; font-familly: bold;">Welcome to M-Rare Store</h5>
+                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s; color:#6666cc">We have medicines, foods and all the supplies of rare diseases .</p>
+                </div> --}}
                   <!--<p class="animated bounceIbRight" style="animation-delay: 3s;"><a id="login-btn" data-toggle="modal" href="#login" data-target="#login" data-bs-target="#login" role="tab">Login</a> </p>
 
                   <p class="animated bounceIbRight" style="animation-delay: 3s;"><a id="signup-btn" data-toggle="modal" href="#signup" data-target="#signup" data-bs-target="#login" role="tab">Sign Up</a></p>-->
@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="carousel-item">
-              <img src="image/medicines/22.jfif" class="d-block w-100" alt="...">
+              <img src="image/medicines/medicine.jpg" class="d-block w-100" alt="...">
               <div class="carousel-caption ">
                 <div class="txt" id="txt">
                   <h5 class="animated bounceIbRight" style="animation-delay: 1s;">Medicines</h5>
@@ -34,21 +34,21 @@
               </div>
             </div>
             <div class="carousel-item">
-              <img src="image/food/food.webp" class="d-block w-100" alt="...">
+              <img src="image/food/food.jpg" class="d-block w-100" alt="...">
               <div class="carousel-caption ">
                 <div class="txt" id="txt">
                   <h5 class="animated bounceIbRight" style="animation-delay: 1s;">Food</h5>
-                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s;">Find the food you need.</p>
+                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s; color: white;">Find the food you need.</p>
                 </div>
                 <p class="animated bounceIbRight" style="animation-delay: 3s;"><a href="/categories/2">Buy Now</a></p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="image/equipement/equipement.jfif" class="d-block w-100" alt="...">
+              <img src="image/parapharmacie/parapharmacy.jpg" class="d-block w-100" alt="...">
               <div class="carousel-caption ">
                 <div class="txt" id="txt">
-                  <h5 class="animated bounceIbRight" style="animation-delay: 1s;">equipment</h5>
-                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s;">Find the equipment you need.</p>
+                  <h5 class="animated bounceIbRight" style="animation-delay: 1s;">Parapharmacy</h5>
+                  <p class="animated bounceIbLeft d-none d-md-block" style="animation-delay: 2s; color: white;">Find the Parapharmacy you need.</p>
                 </div>
                 <p class="animated bounceIbRight" style="animation-delay: 4s;"><a id="equip-btn" href="/categories/3">Buy Now</a></p>
               </div>

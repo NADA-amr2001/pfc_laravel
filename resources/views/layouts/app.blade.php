@@ -66,7 +66,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a id="rech-btn" class="nav-link" data-toggle="modal" data-bs-target="#rech" role="tab"
-                                data-target="#rech"><i style="color: black; margin-top: 10px; font-size: 30px;"
+                                data-target="#rech"><i style="color: black; margin-top: 12px; font-size: 30px;"
                                     class="bi bi-search"></i></a>
                         </li>
                         <li class="nav-item">
