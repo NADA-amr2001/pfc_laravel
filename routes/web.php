@@ -95,8 +95,12 @@ Route::delete('/admin/users/{id}', [App\Http\Controllers\AdminUserController::cl
 
 //profile
 Route::get('/Profile', [App\Http\Controllers\UserController::class, 'myprofile'])->name('Profile');
-Route::get('/myOrder', [App\Http\Controllers\UserController::class, 'myOrder'])->name('myOrder');
+Route::get('/myOrder', [App\Http\Controllers\UserController::class, 'showOrders'])->middleware('auth');
+Route::get('/myProduct', [App\Http\Controllers\UserController::class, 'showProducts'])->middleware('auth');
 Route::put('/Profile/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('Profile.update');
+Route::get('/changePassword', [App\Http\Controllers\UserController::class, 'pass'])->name('changePassword');
+Route::post('/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('changePassword');
+
 
 Route::post('/user/logout', function() {
     auth()->guard('web')->logout();

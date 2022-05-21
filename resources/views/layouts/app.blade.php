@@ -179,7 +179,10 @@
                                 @if (Auth::guard('web')->check())
                                     {{-- <small>{{ Auth::user()->name }}</small> --}}
                                     <li><a class="dropdown-item" href="/Profile/">{{ Auth::user()->name }}</a></li>
-                                    {{-- <li><a class="dropdown-item" href="/myOrder">My Order</a></li> --}}
+                                    <li><a class="dropdown-item" href="/myOrder">My Order</a></li>
+                                    @if (auth()->user()->type == 1)
+                                       <li><a class="dropdown-item" href="/myProduct">My Product</a></li>
+                                    @endif
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('user-logout-form').submit();"
                                             href="{{ route('logout') }}">Log Out</a></li>
