@@ -54,7 +54,7 @@
 .carousel-caption a{
     text-transform: uppercase;
     text-decoration: none;
-   background-image: linear-gradient(to left ,#666666 ,#ff6633, white);
+   background-image: linear-gradient(to left ,#666666 ,#60a3bc, white);
     padding: 10px 30px;
     display: inline-block;
     margin-top: 15px;
@@ -73,8 +73,17 @@
 }
 
 /*nav*/
+  /* nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px 0 100px;
+    flex-wrap: wrap;
+  } */
 #navlogo{
-    height: 60px;
+    height: 65px;
+    margin-left: 40px;
+    margin-right: 35px;
     background-position: top;
     background-size:cover;
     padding: 0 7px;
@@ -89,7 +98,6 @@
     z-index:1030;
     font-size: 18px;
     top: 0;
-
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .navbar-light .navbar-nav .nav-link{
@@ -134,7 +142,7 @@ color: #60a3bc;
     height: 2px;
     background-color: #fb774b;
 }
-@media only screen and (max-width: 1500px){
+@media only screen and (max-width: 1000px){
     body>nav>div>button:hover,
     body>nav>div>button.focus{
         background-color: #ada9a9;

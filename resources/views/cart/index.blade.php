@@ -32,11 +32,22 @@
                                     @method("PUT")
                                     <div class="form-group">
                                         <input type="number" onkeyup="setQty('qty-{{$item->id}}',{{ $item->associatedModel->in_stock}})" style="width: 80px" name="qty" id="qty-{{$item->id}}" value="{{$item->quantity }}" max="{{ $item->associatedModel->in_stock}}" min="1" class="form-control">
+                                     {{-- @if(qty-{{$item->id}} == {{ $item->associatedModel->in_stock}})
+                                      <div class="alert alert-errorLink alert-dismissible fade show" >
+                                        <strong>{!! session()->get("danger") !!}</strong>
+                                        <button type="button " class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                      </div>
+                                     @endif --}}
                                     </div>
-                                    {{-- <script>function setQty(qty-{{$item->id}} , {{ $item->associatedModel->in_stock}}){
-                                                     if(qty-{{$item->id}} > {{ $item->associatedModel->in_stock}}){
-                                                          alert("hiiiiiiiiiiiiiii");
-                                                       }
+
+                                    {{-- <script>
+
+                                     function setQty(qty-{{$item->id}} , {{ $item->associatedModel->in_stock}}){
+                                                    // if(qty-{{$item->id}} > {{ $item->associatedModel->in_stock}}){
+                                                        alert("hiiiiiiiiiiiiiii");
+                                                      // }
                                                     }</script> --}}
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-sm btn-warning " ><i class="fa fa-edit"></i></button>
@@ -64,7 +75,13 @@
 						</tr> --}}
 						<tr>
 							<td>
-                                <a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                                @if (Cart::getSubtotal() > 0 )
+                                   <div class="form-group">
+                                     <a href="{{ route("make.payment")  }}" class="btn btn-warning"><i class="fa fa-angle-left"></i>
+                                             Payer {{ Cart::getSubtotal()  }} DA via paypal
+                                     </a>
+                                   </div>
+                                @endif
                             </td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong>{{ $total}} DA</strong></td>
@@ -79,20 +96,12 @@
 					</tfoot>
 				</table>
 
-                {{-- @if (Cart::getSubtotal() > 0 )
-                <div class="form-group">
-                    <a href="{{ route("make.payment")  }}" class="btn btn-primary mt-3">
-                       Payer {{ Cart::getSubtotal()  }} DA via paypal
-                    </a>
-                </div>
-
-                @endif --}}
-                <form action="{{route('index.paypal')}}" method="post" >
+                {{-- <form action="{{route('index.paypal')}}" method="post" >
                     @csrf
                   <div class="row">
                       <button type="submit" class="btn btn-success">payment</button>
                   </div>
-                </form>
+                </form> --}}
 
 </div>
 

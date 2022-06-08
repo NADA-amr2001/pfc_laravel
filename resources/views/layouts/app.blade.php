@@ -54,15 +54,17 @@
     <div id="app">
         <!--nav-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top ">
-            <div class="container">
-                <img id="navlogo" href="{{ url('/') }}" src="/image/logo@2x.png" alt="logo">
-                <button style="background: #60a3bc" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <div class="container-fluid">
+                 <div class="col-md-4">
+                  <img  id="navlogo" href="{{ url('/') }}" src="/image/logo@2x.png" alt="logo">
+                  <button style="background: #60a3bc;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span id="bar" class="fas fa-bars"></span>
-                </button>
+                  </button>
+                 </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="visibility: visible;">
+                <div class="collapse navbar-collapse col-md-8" id="navbarSupportedContent" style="visibility: visible;">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a id="rech-btn" class="nav-link" data-toggle="modal" data-bs-target="#rech" role="tab"
@@ -91,7 +93,7 @@
 
 
                                     <!-- <li><a class="dropdown-item" id="food-btn"  href="/food">Food</a></li>
-                    <li><a class="dropdown-item" id="equip-btn" href="/equipements">Equipements</a></li> -->
+                         <li><a class="dropdown-item" id="equip-btn" href="/equipements">Equipements</a></li> -->
                                 </ul>
                             </div>
                         </li>
@@ -141,18 +143,18 @@
                             </div>
                          </li>
                         @endif --}}
-                 @if (Auth::guard('web')->check())
-                <li class="nav-item">
-                    <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
-                </li>
-                @endif
-                <li class="nav-item">
-                    <div class="dropdown me-2">
-                        <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset"
+                         @if (Auth::guard('web')->check())
+                         <li class="nav-item">
+                           <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
+                         </li>
+                         @endif
+                         <li class="nav-item">
+                         <div class="dropdown me-2">
+                         <a style="" class="nav-link dropdown-toggle" href="#" id="dropdownMenuOffset"
                             data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">  <img  src="{{ url(Auth::user()->image ??'/uploads/profile/user.png') }}" style="width:40px; height:40px; font-size: 18px;  border-radius: 50%;"> </a>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            @guest
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                             @guest
                                 {{-- <small>GUEST</small> --}}
 
                                 <li><a class="dropdown-item" id="login-btn" data-toggle="modal" data-target="#login"
@@ -195,7 +197,7 @@
                             @csrf
                         </form>
                     </div>
-                </li>
+                  </li>
                 </ul>
             </div>
     </div>
@@ -373,7 +375,7 @@
             </div>
 
 
-            <div class="footer-one col-lg-3 col-md-6 col-12">
+            <div class="footer-one col-lg-3 col-md-6 col-12" style="">
                 <h4 class="pb-2">
                     <p>Contact</p>
                 </h4>

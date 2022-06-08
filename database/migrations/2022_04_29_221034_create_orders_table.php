@@ -22,10 +22,11 @@ class CreateOrdersTable extends Migration
                 $table->boolean("paid")->default(0);
                 $table->boolean("delivered")->default(0);
                 $table->timestamps();
-                $table->foreign("user_id")
-                      ->references("id")
-                      ->on("users")
-                      ->onDelete("cascade")->unsigned();
+                // $table->foreign("user_id")
+                //       ->references("id")
+                //       ->on("users")
+                //       ->onDelete("cascade")->unsigned()->index();
+                $table->foreign("user_id")->references("id")->on("users");
             });
 
         }

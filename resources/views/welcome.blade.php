@@ -106,14 +106,7 @@
               <a href="#" class="btn ">Details</a>
             </div>
           </div>
-          <div class="card" id="buy-card">
-            <img src="image/medicines/risonate@2x.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Risonate</h5>
-              <p class="card-text">1000 DA</p>
-              <a href="#" class="btn ">Details</a>
-            </div>
-          </div>
+ 
 
         </div>
 
