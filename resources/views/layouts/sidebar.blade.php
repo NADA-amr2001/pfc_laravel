@@ -17,7 +17,7 @@
     </a>
 </ul>
  <!--add category-->
- <div class="modal fade " id="add_category">
+ {{-- <div class="modal fade " id="add_category">
     <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
         <div class="modal-content user_card">
 
@@ -29,4 +29,4 @@
         </div>
 
     </div>
-</div>
+</div> --}}

@@ -86,8 +86,8 @@ Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'getUse
 Route::delete('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 Route::get('/admin/products/{id}/edit', [App\Http\Controllers\AdminProductController::class, 'edit'])->name('admin.products.edit');
 Route::put('/admin/products/{id}', [App\Http\Controllers\AdminProductController::class, 'update'])->name('admin.products.update');
-// Route::get('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'create'])->name('admin.products.create');
-// Route::post('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'store'])->name('admin.products.store');
+Route::get('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'create'])->name('admin.products.create');
+Route::post('/admin/products/create', [App\Http\Controllers\AdminProductController::class, 'store'])->name('admin.products.store');
 Route::get('/admin/products/catg', [App\Http\Controllers\AdminProductController::class, 'catg'])->name('admin.products.catg');
 Route::post('/admin/products', [App\Http\Controllers\AdminProductController::class, 'add_catg'])->name('admin.products.add_catg');
 //user admin
@@ -132,3 +132,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('welcome');
 })->name('register');
+
+Route::get('/update_wishlist',[App\Http\Controllers\ProductController::class, 'updatewishlist']);
+
+Route::resource('products_wish', App\Http\Controllers\WishlistController::class);

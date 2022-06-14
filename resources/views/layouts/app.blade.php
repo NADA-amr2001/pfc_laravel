@@ -13,8 +13,8 @@
     <!--bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -41,15 +41,21 @@
     </script>
     <script src="https://use.fontawesome.com/c1d51a72c4.js"></script>
 
+
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" Type="text/css" href="{{ asset('css/M_Rare.css') }}">
 </head>
 
 <body>
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <div id="notifDiv"></div>
+
+
 
     <div id="app">
         <!--nav-->
@@ -271,7 +277,7 @@
                                                         autocomplete="price">
                                                 </div>
                                                 <div class="input-group mb-2">
-                                                    <input id="qty" type="number" placeholder="qty"
+                                                    <input id="qty" type="number" placeholder="qty" min="1"
                                                         class="form-control" name="qty" required
                                                         autocomplete="number">
                                                 </div>
@@ -866,6 +872,12 @@
     </script>
     <script type="text/javascript" src="{{ asset('js/app_new.js') }}"></script>
 <script>
+
+ <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    @stack('javascript')
+
     var path = "{{ request()->path() }}";
     @if ( request()->path() == 'login')
         document.querySelector('[href="#login"]').click();

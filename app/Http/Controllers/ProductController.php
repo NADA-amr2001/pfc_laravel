@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Wishlist;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -229,6 +231,33 @@ class ProductController extends Controller
 
    return view('products.search')->with('products',$products);
     }
+
+    public function updatewishlist( Request $request){
+        //dd($request);
+        // if($request->ajax()) {
+            $data = $request->all();
+            // dd($data['product_id']);
+            $countWishlist = Wishlist::countWishlist($data['product_id']);
+
+            if($countWishlist == 0) {
+                $whishlist = Wishlist::create([
+                    "user_id" => $data['user_id'],
+                    "product_id" => $data['product_id'],
+                ]);
+                // $wishlist->user_id = $data['user_id'];
+                // $wishlist->product_id = $data['product_id'];
+                // $wishlist->save();
+                return response()->json(['action' => 'add', 'message' => 'product Added Successefully to Wishlist']);
+            }else{
+                Wishlist::where(['user_id' => Auth::user()->id, 'product_id' => $data['product_id']])->delete();
+                return response()->json(['action' => 'remove', 'message' => 'product Removed Successefully to Wishlist']);
+            }
+        // }
+
+    }
+    public function wishlist(){
+        return $this-belongsToMany(Wishlist::class);
+     }
 
 
 

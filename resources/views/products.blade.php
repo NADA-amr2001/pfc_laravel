@@ -6,6 +6,21 @@
             @foreach ($products as $product)
                 {{-- @foreach ($product->categories as $category)      {{ $category ->name }}{{ $loop->last ? '' : ',' }}  @endforeach --}}
                 <div class="card" onclick="openproduct()" id="buy-card">
+
+                    @guest
+                    <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="#detail-{{ $product->id }}" class="btn " src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{$product->title}}</h5>
+                        <p class="card-text">{{$product->price}} DA</p>
+                        <!--<a id="detail-btn" data-toggle="modal" data-bs-target="#lovenox" data-target="#lovenox" role="tab" href="#lovenox" class="btn " >Details</a>-->
+                        {{-- <form action="{{ route("products.show", $product->id) }}" method="post">
+                            @csrf --}}
+                           <a id="detail-btn" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="#detail-{{ $product->id }}" class="btn " >Details</a>
+                        {{-- </form> --}}
+                    </div>
+                    @endguest
+
+                    @auth
                     @if (auth()->user()->id == $product->user_id)
                     <img style="width:24rem; height:130px" href="" class="btn "  data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn "
                     src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->title }}">
@@ -33,11 +48,25 @@
                               </form>
                              </div>
                             @else
+                            <div class="btn-container" style="display: flex;">
                               <a id="detail-btn_{{ $product->id }}" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
-                                data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn ">Details</a>
+                                data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn " style="margin-right:110px">Details</a>
+                              @auth
+                                <form action="{{ route('add.cart', $product->id) }}" method="post">
+                                  @csrf
+                                  <button type="submit" id="add" class="add-to-cart btn"><i class="fa fa-shopping-cart"></i></button>
+                                </form>
+                              @endauth
+                              @guest
+                              <a id="add" class="add-to-cart btn"  data-toggle="modal"
+                              data-target="#login" data-bs-target="#login"
+                                 ><i class="fa fa-shopping-cart"></i></a>
+                              @endguest
+                            </div>
                            @endif
 
                     </div>
+                    @endauth
                 </div>
             @endforeach
         </div>
@@ -82,7 +111,7 @@
                                                         class="form-control" name="price" value="{{ $product->price }}">
                                                 </div>
                                                 <div class="input-group mb-2">
-                                                    <input type="number" placeholder="quantity in stock"
+                                                    <input type="number" placeholder="quantity in stock" min="{{ $product->in_stock }}"
                                                         class="form-control" name="qty" value="{{ $product->in_stock }}">
                                                 </div>
 
@@ -124,6 +153,9 @@
     </div>
 
     {{-- @include('partials.show') --}}
+    {{-- @php
+        $witem = Cart::instance('wishlist')->content()->pluck('id');
+    @endphp --}}
     @foreach ($products as $product)
 
         <div id="detail-{{ $product->id }}" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
@@ -137,25 +169,28 @@
                         <div class="card" id="d-card">
                             <div class="container">
                                 <div class="wrapper row">
-                                    <div class="preview col-md-4">
+                                    <div class="preview col-md-3">
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1"><img id="d-img"
                                                     src="{{ asset($product->image) }}" /></div>
                                         </div>
                                     </div>
-                                    <div class="details col-md-8">
+                                    <div class="details col-md-9">
 
                                         <h2 class="product-title">{{ $product->title }}</h2>
                                         {{-- <span>{{ $product->category->title }}</span> --}}
-                                        <p class="product-description">{{ $product->description }}</p>
+                                        <p style="width: 300px" class="product-description">{{ $product->description }}</p>
                                         <h4 class="price">current price:<br> <span>{{ $product->price }}
                                                 DA</span></h4>
-                                        @if (auth()->user()->id == $product->user_id)
-                                          <h4 class="price">My Product:<br></h4>
-                                        @else
+                                        @auth
+                                          @if (auth()->user()->id == $product->user_id)
+                                             <h4 class="price">My Product<br></h4>
+                                          @endif
+                                        @endauth
+                                        @guest
                                           <h4 class="price">Seller Name:<br></h4>
                                           <h5>{{ $product->user->name }}  <a href="mailto:{{ $product->user->email }}">    Send Email</a></h5>
-                                        @endif
+                                        @endguest
                                         <p class="vote"><strong>91%</strong> of buyers use this product!
                                             <strong>(87 votes)</strong></p>
                                         <p class="font-weight-bold">
@@ -169,8 +204,9 @@
                                                 </span>
                                             @endif
                                         </p>
-                                        @if (($product->in_stock >0) && (auth()->user()->id != $product->user_id))
-                                        <form action="{{ route('add.cart', $product->id) }}" method="post">
+                                          @auth
+                                          @if (($product->in_stock >0) && (auth()->user()->id != $product->user_id))
+                                          <form action="{{ route('add.cart', $product->id) }}" method="post">
                                             @csrf
                                             <p><strong> Quantity:</strong></p>
                                             <div style="width: 125px; height: 35px;" class="input-group">
@@ -185,7 +221,7 @@
 
 
                                                 <input  type="number" onkeyup="setQty('qty-{{$product->id}}',{{ $product->in_stock}})" style="height: 40px;" type="text" name="qty" id="qty-{{ $product->id }}"
-                                                    class="form-control input-number" value="1" min="1"
+                                                    class="form-control input-number" value="" min="1"
                                                     max="{{ $product->in_stock }}">
 
                                                 {{-- <span class="input-group-btn">
@@ -197,15 +233,28 @@
                                                 </span> --}}
                                             </div>
 
-
                                             <div>
+
                                                 @auth
-                                                <button type="submit" id="add" class="add-to-cart btn "
-                                                   ><i class="fa fa-shopping-cart"></i> Add To
-                                                    Cart</button>
-                                                <button type="button" id="like" style="background: none; "
-                                                    class="like "><span style="font-size: 30px; margin-left: 30px;"
-                                                        class="fa fa-heart"></span></button>
+                                                <button type="submit" id="add" class="add-to-cart btn " ><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                                                <button type="button" id="like" style="background: none; "class="like ">
+                                                    @php
+                                                        $countWishlist = 0
+                                                    @endphp
+                                                    @if(Auth::check(0))
+                                                        @php
+                                                            $countWishlist = App\Models\Wishlist::countWishlist($product['id'])
+                                                        @endphp
+                                                    @endif
+                                                     <a class="update_wishlist" data-productid="{{ $product->id }}" >
+                                                        @if($countWishlist > 0) <i style="font-size: 30px; margin-left: 30px;" class="fas fa-heart fa-3x"></i>
+                                                        @else <i style="font-size: 30px; margin-left: 30px;" class="far fa-heart fa-3x"></i>
+                                                        @endif
+                                                    </a>
+                                                    {{-- @else
+                                                     <a href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->price}})"> <span style="font-size: 30px; margin-left: 30px;"  class="fa fa-heart"></span></a>
+                                                    @endif --}}
+                                                    </button>
 
                                                       {{-- <form  action="POST">
                                                             @csrf
@@ -217,15 +266,16 @@
 
 
                                                 @endauth
-                                                @guest
-                                                <a id="add" class="add-to-cart btn"  data-toggle="modal"
-                                                data-target="#login" data-bs-target="#login"
-                                                   ><i class="fa fa-shopping-cart"></i>Login to Add To
-                                                    Cart</a>
-                                                @endguest
                                             </div>
-                                        </form>
+                                         </form>
                                         @endif
+                                        @endauth
+                                        @guest
+                                        <a id="add" class="add-to-cart btn"  data-toggle="modal"
+                                        data-target="#login" data-bs-target="#login"
+                                           ><i class="fa fa-shopping-cart"></i>Login to Add To
+                                            Cart</a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -237,4 +287,51 @@
         </div>
     @endforeach
 @endsection
+
+@push('javascript')
+
+<script>
+
+var user_id = "{{ Auth::id() }}";
+
+    $(document).ready(function(){
+        $('.update_wishlist').click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var product_id = $(this).data('productid');
+            $.ajax({
+                type: 'GET',
+                url: '/update_wishlist',
+                data: {
+                    product_id: product_id,
+                    user_id: user_id
+                },
+                success:function(response){
+                    if(response.action == 'add'){
+                        $('a[data-productid='+ product_id+']').html('<i style="font-size: 30px; margin-left: 30px;" class="fas fa-heart "></i>');
+
+                        $('#notifDiv').fadeIn();
+                        $('#notifDiv').css('background', 'green');
+                        $('#notifDiv').text(response.message);
+                        setTimeout(() => {
+                            $('#notifDiv').fadeOut();
+                        }, 3000);
+                    }else if(response.action == 'remove'){
+                        $('a[data-productid='+product_id+']').html('<i style="font-size: 30px; margin-left: 30px;" class="far fa-heart "></i>');
+                        $('#notifDiv').fadeIn();
+                        $('#notifDiv').css('background', 'red');
+                        $('#notifDiv').text(response.message);
+                        setTimeout(() => {
+                            $('#notifDiv').fadeOut();
+                        }, 3000);
+                    }
+                }
+            })
+        });
+    });
+</script>
+@endpush
 

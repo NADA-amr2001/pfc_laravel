@@ -524,12 +524,32 @@ footer li a:hover{
         border: none;
         color: white;
         transition: 0.3s all;
+        /* display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5em; */
      }
     .add-to-cart:hover {
       background: #666666;
       color: #60a3bc; }
     .like:hover{
-        color: #60a3bc;
+        color: #ff5050;
+      }
+      .fa-heart{
+        color: #ff5050;
+      }
+      #notifDiv{
+        z-index: 10000;
+        display: none;
+        background: green;
+        font-weight: 450;
+        width: 350px;
+        position: fixed;
+        top: 90%;
+        left: 40%;
+        color: white;
+        padding: 5px 20px;
+
       }
   #qnt-btnm{
       color: black;
@@ -605,8 +625,35 @@ footer li a:hover{
     .help-block.with-errors {
         color: #ff5050;
         margin-top: 5px;
+    }
+/*
+    .product-wish{
+        /*position: absolute;
+        top: 10%;
+        left: 0;
+        z-index: 99;
+        right: 30px;
+        text-align: right;
+        padding-top: 0;*/
+    /* }*/
+    /* #product-wish .fa{
+        color: #cbcbcb;
+        font-size: 32px;
 
     }
+    #product-wish .fa:hover{
+        color: #ff5050;
+
+    } */
+    .MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+    .MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
+        .MultiCarousel .MultiCarousel-inner .item { float: left; margin: 50px;}
+        /* .MultiCarousel .MultiCarousel-inner .item > div {width: 200px; padding:10px; margin:10px;} */
+    .MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
+    .MultiCarousel .leftLst { left:0; }
+    .MultiCarousel .rightLst { right:0; }
+
+        .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
 
 
 
