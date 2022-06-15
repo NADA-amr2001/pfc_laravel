@@ -68,14 +68,19 @@
      <section id="featured" class="my-5 pd-5">
         <div class="container text-center mt-5 py-5">
             <div >
-                <h3>RECOMMANDED</h3>
+                <h3>Our Favorites</h3>
                 <hr class="mx-auto" style="color: #ff6633; width:100px">
                 <p>Here you can check out on M-Rare Store</p>
             </div>
           <div class="row mx-auto container">
             <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
                     <div class="MultiCarousel-inner" style="width: 1000px">
-                        {{-- @foreach ($wishlists as $wishlist)
+                        {{-- @php
+                         $wishlists = App\Models\Wishlist::with('product')
+                                      ->where('user_id', auth()->user()->id)
+                                      ->orderby('id', 'desc');
+                        @endphp
+                        @foreach ($wishlists as $wishlist)
                         <div class="item">
                             <div class="card" onclick="openproduct()" id="buy-card">
                                 <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail-{{ $wishlist->product_id  }}" data-target="#detail-{{ $wishlist->product_id }}" role="tab" href="#detail-{{ $wishlist->product_id}}" class="btn " src="{{ $wishlist->product->image }}" class="card-img-top" alt="{{ $wishlist->product->title }}">
@@ -87,56 +92,56 @@
                             </div>
                         </div>
                         @endforeach --}}
-                        <div class="item">
-                            <div class="card" id="buy-card">
-                                <img src="image/medicines/humex@2x.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">Humex</h5>
-                                  <p class="card-text">1000 DA</p>
-                                  <a href="#" class="btn ">Details</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="item">
-                            <div class="card" id="buy-card">
-                                <img src="image/medicines/lovenox@2x.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">lovenox</h5>
-                                  <p class="card-text">1200 DA</p>
-                                  <a href="#" class="btn ">Details</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="item">
-                            <div class="card" id="buy-card">
-                                <img src="image/food/vigor1@2x.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">Vigor</h5>
-                                  <p class="card-text">450 DA</p>
-                                  <a href="#" class="btn ">Details</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="item">
-                            <div class="card" id="buy-card">
-                                <img src="image/parapharmacie/equip6@2x.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">Casque</h5>
-                                  <p class="card-text">5000 DA</p>
-                                  <a href="#" class="btn ">Details</a>
-                                </div>
-                              </div>                        </div>
-                        <div class="item">
-                            <div class="card" id="buy-card">
-                                <img src="image/medicines/covarinox @2x.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">Covarinox</h5>
-                                  <p class="card-text">1500 DA</p>
-                                  <a href="#" class="btn ">Details</a>
-                                </div>
-                              </div>
-                        </div>
-
+//                         {{-- <div class="item">
+//                             <div class="card" id="buy-card">
+//                                 <img src="image/medicines/humex@2x.png" class="card-img-top" alt="...">
+//                                 <div class="card-body">
+//                                   <h5 class="card-title">Humex</h5>
+//                                   <p class="card-text">1000 DA</p>
+//                                   <a href="#" class="btn ">Details</a>
+//                                 </div>
+//                               </div>
+//                         </div>
+//                         <div class="item">
+//                             <div class="card" id="buy-card">
+//                                 <img src="image/medicines/lovenox@2x.png" class="card-img-top" alt="...">
+//                                 <div class="card-body">
+//                                   <h5 class="card-title">lovenox</h5>
+//                                   <p class="card-text">1200 DA</p>
+//                                   <a href="#" class="btn ">Details</a>
+//                                 </div>
+//                               </div>
+//                         </div>
+//                         <div class="item">
+//                             <div class="card" id="buy-card">
+//                                 <img src="image/food/vigor1@2x.png" class="card-img-top" alt="...">
+//                                 <div class="card-body">
+//                                   <h5 class="card-title">Vigor</h5>
+//                                   <p class="card-text">450 DA</p>
+//                                   <a href="#" class="btn ">Details</a>
+//                                 </div>
+//                               </div>
+//                         </div>
+//                         <div class="item">
+//                             <div class="card" id="buy-card">
+//                                 <img src="image/parapharmacie/equip6@2x.png" class="card-img-top" alt="...">
+//                                 <div class="card-body">
+//                                   <h5 class="card-title">Casque</h5>
+//                                   <p class="card-text">5000 DA</p>
+//                                   <a href="#" class="btn ">Details</a>
+//                                 </div>
+//                               </div>                        </div>
+//                         <div class="item">
+//                             <div class="card" id="buy-card">
+//                                 <img src="image/medicines/covarinox @2x.png" class="card-img-top" alt="...">
+//                                 <div class="card-body">
+//                                   <h5 class="card-title">Covarinox</h5>
+//                                   <p class="card-text">1500 DA</p>
+//                                   <a href="#" class="btn ">Details</a>
+//                                 </div>
+//                               </div>
+//                         </div>
+//  --}}
 
                     </div>
                     <button class="btn btn-primary leftLst"><</button>
@@ -192,7 +197,8 @@
       <section id = "about" class = "py-5">
         <div class = "container">
             <div class = "row gy-lg-5 align-items-center">
-                <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
+
+                <div id="about-txt" class = "col-lg-6 order-lg-1 text-center text-lg-start">
                     <div class = "title pt-3 pb-5">
                         <h1 class = "position-relative d-inline-block ms-4">About Us</h1>
                     </div>

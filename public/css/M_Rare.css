@@ -18,7 +18,7 @@
 }
 #hm{
     margin-bottom: 40px;
-    background-color: #60a3bc;
+    background-color: #3399cc;
 }
 .carousel-item{
     height: 100vh;
@@ -54,7 +54,7 @@
 .carousel-caption a{
     text-transform: uppercase;
     text-decoration: none;
-   background-image: linear-gradient(to left ,#666666 ,#60a3bc, white);
+   background-image: linear-gradient(to left ,#996699 ,#3399cc, white);
     padding: 10px 30px;
     display: inline-block;
     margin-top: 15px;
@@ -69,7 +69,7 @@
 }
 .carousel-caption a:hover{
     color: white;
-    border-bottom: #60a3bc;
+    border-bottom: #3399cc;
 }
 
 /*nav*/
@@ -109,7 +109,7 @@
 .navbar i:hover,
 .navbar-light .navbar-nav .nav-link.active,
 .navbar i.active{
-color: #60a3bc;
+color: #3399cc;
 }
 .navbar i{
     padding: 0 7px ;
@@ -123,8 +123,8 @@ color: #60a3bc;
     cursor: pointer;
     font-weight: 500;
     transition: 0.3s ease;
-    color: #666666;
-    background-color: #60a3bc;
+    color: #996699;
+    background-color: #3399cc;
 }
 #bar:hover,
 #bar.active{
@@ -172,22 +172,22 @@ color: #60a3bc;
 /*btn search*/
 .search-box{
     position: center;
-    background:  #666666;
+    background:  #996699;
     height: 60px;
     border-radius: 40px;
     padding: 10px;
 }
 .search-box:hover > #btn_search{
    background: white;
-   color: #60a3bc;
+   color: #3399cc;
 }
 #btn_search{
-    color: #60a3bc;
+    color: #3399cc;
     float: right;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background:  #666666;
+    background:  #996699;
     display: flex;
     border: none;
     justify-content: center;
@@ -199,7 +199,7 @@ color: #60a3bc;
     outline: none;
     float: left;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     transition: 0.4s;
     line-height: 40px;
     align-items: center;
@@ -207,7 +207,7 @@ color: #60a3bc;
     margin-left: 30px;
     width: 200px;
 }
-#search-shop-txt{
+/* #search-shop-txt{
     border: none;
     background: none;
     outline: none;
@@ -221,7 +221,7 @@ color: #60a3bc;
 #search-shop:hover > #search-shop-txt{
     width: 150px;
     padding: 0 6px;
-}
+} */
 /*services*/
 
 #service-card{
@@ -235,7 +235,7 @@ color: #60a3bc;
 
 #service-card.hover,
 #service-card:hover {
-    box-shadow: 0 20px 40px #60a3bc
+    box-shadow: 0 20px 40px #3399cc
 }
 
 .img {
@@ -258,7 +258,7 @@ button:focus {
 
 /*about*/
 #about{
-    background-image: url(/image/txt.png);
+    background: white;
     align-items: center;
 
 }
@@ -269,12 +269,13 @@ button:focus {
 
 /*footer*/
 footer{
-    position: r;
-    background-color:#60a3bc;
+    background-color:white;
     right:0;
     left:0;
     font-size: 18px;
     bottom: 0;
+    box-shadow: 0 -5px 30px -5px #3399cc;
+
 }
 footer h5{
     color: #d8d8d8;
@@ -289,7 +290,7 @@ footer li a{
     color: black;
     }
 footer li a:hover{
-    color: #666666;
+    color: #996699;
 }
 /*login*/
 #login, #signup {
@@ -334,7 +335,7 @@ footer li a:hover{
 }
 .login_btn {
     width: 100%;
-    background: #60a3bc !important;
+    background: #3399cc !important;
     color: white !important;
 }
 .login_btn:focus {
@@ -345,7 +346,7 @@ footer li a:hover{
     padding: 0 2rem;
 }
 .input-group-text {
-    background: #60a3bc !important;
+    background: #3399cc !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;
@@ -356,7 +357,7 @@ footer li a:hover{
     outline: 0px !important;
 }
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #60a3bc !important;
+    background-color: #3399cc !important;
 }
 .a{
     color: #fff;
@@ -379,22 +380,22 @@ footer li a:hover{
     opacity: 0.7;
 }
 #buy-card a{
-    background: #60a3bc;
+    background: #3399cc;
     transform: translateY(20px);
     border: none;
     opacity: 0;
     border-bottom: 3px solid #fff;
-    border-color: #666666;
+    border-color: #996699;
     color: white;
     transition: 0.3s all;
 }
 #buy-card button{
-    background: #60a3bc;
+    background: #3399cc;
     transform: translateY(20px);
     border: none;
     opacity: 0;
     border-bottom: 3px solid #fff;
-    border-color: #666666;
+    border-color: #996699;
     color: white;
     transition: 0.3s all;
 }
@@ -410,6 +411,7 @@ footer li a:hover{
     color: black;
     align-items: center;
 }
+
   /*détails*/
   #details {
     font-family: 'open sans';
@@ -502,19 +504,19 @@ footer li a:hover{
     margin-bottom: 15px; }
 
   .product-title {
-    color: #60a3bc;
+    color: #3399cc;
     margin-top: 0; }
 
 
 
 
   .add-to-cart {
-    background: #60a3bc;
+    background: #3399cc;
     height: 40px;
     transform: translateY(20px);
     border: none;
     border-bottom: 3px solid #fff;
-    border-color: #666666;
+    border-color: #996699;
     color: white;
     transition: 0.3s all;
 
@@ -530,8 +532,8 @@ footer li a:hover{
         margin-top: 1.5em; */
      }
     .add-to-cart:hover {
-      background: #666666;
-      color: #60a3bc; }
+      background: #996699;
+      color: #3399cc; }
     .like:hover{
         color: #ff5050;
       }
@@ -553,7 +555,7 @@ footer li a:hover{
       }
   #qnt-btnm{
       color: black;
-      background-color: #60a3bc;
+      background-color: #3399cc;
       border-top-left-radius: 2em 5em; border-top-right-radius: 0em 0em; border-bottom-right-radius: 0em 0em; border-bottom-left-radius: 2em 5em;
       width: 40px;
       height: 40px;
@@ -561,7 +563,7 @@ footer li a:hover{
   }
   #qnt-btnp{
     color: black;
-    background-color: #60a3bc;
+    background-color: #3399cc;
     border-top-left-radius: 0em 0em; border-top-right-radius: 2em 5em; border-bottom-right-radius: 2em 5em; border-bottom-left-radius: 0em 0em;
     width: 40px;
     height: 40px;
@@ -606,7 +608,7 @@ footer li a:hover{
 
 }
 #cont_l{
-    color: #666666;
+    color: black;
 }
 #card_l{
 
@@ -654,6 +656,16 @@ footer li a:hover{
     .MultiCarousel .rightLst { right:0; }
 
         .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
+
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 0px;
+            right: 20px;
+            display: none;
+            border-radius: 50%;
+            background-color: #996699;
+            color: white;
+          }
 
 
 

@@ -20,7 +20,7 @@ class WishlistController extends Controller
     ->paginate(6);
     //dd($wishlists);
      return view('home', compact('user', 'wishlists'));
-     
+
 }
 
 }

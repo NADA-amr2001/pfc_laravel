@@ -1,9 +1,43 @@
 @extends('layouts.app')
 @section('content')
     <section id="medicines" style="margin-top:30px">
+
+            @php
+                $categories = App\Models\Category::all();
+            @endphp
+            <ul class="nav nav-tabs">
+                @foreach ($categories as $category )
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{$category->title}}
+                      <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @if(count((is_countable($subCategories)?$subCategories:[]))>0)
+                            @foreach ($subCategories as $subcategory )
+                             <li>
+                                <a href="#" class=""> {{$subcategory->title}} </a>
+                             </li>
+                            @endforeach
+                            @endif
+                        </ul>
+                </li>
+                @endforeach
+            </ul>
+
+
+           {{-- @foreach ($categories as $category)
+             @foreach ($category->subCategories as $subcategory)
+             <a class="list-group-item font-weight-bold list-group-item-action"
+                      href="">{{ $subcategory->title }}
+             </a>
+            @endforeach
+          @endforeach
+             --}}
+            {{-- </ul>
+        </div> --}}
         <div class="row mx-auto container">
             <!--products-->
-            @foreach ($products as $product)
+            @if(count((is_countable($products)?$products:[]))>0)
+             @foreach ($products as $product)
                 {{-- @foreach ($product->categories as $category)      {{ $category ->name }}{{ $loop->last ? '' : ',' }}  @endforeach --}}
                 <div class="card" onclick="openproduct()" id="buy-card">
 
@@ -54,6 +88,11 @@
                               @auth
                                 <form action="{{ route('add.cart', $product->id) }}" method="post">
                                   @csrf
+                                  <input type="hidden" value="{{ $product->id }}" name="id">
+                                  <input type="hidden" value="{{ $product->title }}" name="title">
+                                  <input type="hidden" value="{{ $product->price }}" name="price">
+                                  <input type="hidden" value="{{ $product->image }}"  name="image">
+                                  <input type="hidden" value="1" name="qty">
                                   <button type="submit" id="add" class="add-to-cart btn"><i class="fa fa-shopping-cart"></i></button>
                                 </form>
                               @endauth
@@ -68,7 +107,8 @@
                     </div>
                     @endauth
                 </div>
-            @endforeach
+             @endforeach
+            @endif
         </div>
         <hr>
         <div class="justify-content-center d-flex">
@@ -172,11 +212,11 @@
                                     <div class="preview col-md-3">
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1"><img id="d-img"
-                                                    src="{{ asset($product->image) }}" /></div>
+                                                src="{{ asset($product->image) }}" />
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="details col-md-9">
-
                                         <h2 class="product-title">{{ $product->title }}</h2>
                                         {{-- <span>{{ $product->category->title }}</span> --}}
                                         <p style="width: 300px" class="product-description">{{ $product->description }}</p>
@@ -221,7 +261,7 @@
 
 
                                                 <input  type="number" onkeyup="setQty('qty-{{$product->id}}',{{ $product->in_stock}})" style="height: 40px;" type="text" name="qty" id="qty-{{ $product->id }}"
-                                                    class="form-control input-number" value="" min="1"
+                                                    class="form-control input-number" value="1" min="1"
                                                     max="{{ $product->in_stock }}">
 
                                                 {{-- <span class="input-group-btn">
@@ -236,7 +276,7 @@
                                             <div>
 
                                                 @auth
-                                                <button type="submit" id="add" class="add-to-cart btn " ><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                                                <button type="submit" id="add" class="add-to-cart btn " name="product_id" value="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
                                                 <button type="button" id="like" style="background: none; "class="like ">
                                                     @php
                                                         $countWishlist = 0

@@ -62,8 +62,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top ">
             <div class="container-fluid">
                  <div class="col-md-4">
-                  <img  id="navlogo" href="{{ url('/') }}" src="/image/logo@2x.png" alt="logo">
-                  <button style="background: #60a3bc;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  <img  id="navlogo" href="{{ url('/') }}" src="/image/logo1@2x.png" alt="logo">
+                  <button style="background: #3399cc;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span id="bar" class="fas fa-bars"></span>
@@ -82,7 +82,6 @@
                         </li>
                         {{-- @if (Auth::guest() && Auth::user()) --}}
                         @php
-
                             $categories = App\Models\Category::all();
                         @endphp
                         <li class="nav-item">
@@ -151,8 +150,9 @@
                         @endif --}}
                          @if (Auth::guard('web')->check())
                          <li class="nav-item">
-                           <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"></a>
+                           <a style="font-size: 30px !important;" href="/cart" class="nav-link bi bi-cart2"><span class="badge badge-pill" style="background: #0082ca;">{{ \Cart::getContent()->count() }}</span></a>
                          </li>
+                         {{--  --}}
                          @endif
                          <li class="nav-item">
                          <div class="dropdown me-2">
@@ -164,10 +164,10 @@
                                 {{-- <small>GUEST</small> --}}
 
                                 <li><a class="dropdown-item" id="login-btn" data-toggle="modal" data-target="#login"
-                                        data-bs-target="#login" role="tab" href="#login">LOG IN</a></li>
+                                        data-bs-target="#login" role="tab" href="#login"><p class="nav-link">Log In</p></a></li>
 
                                 <li><a class="dropdown-item" id="signup-btn" data-toggle="modal" data-target="#signup"
-                                        data-bs-target="#signup" role="tab" href="#signup">SIGN UP</a></li>
+                                        data-bs-target="#signup" role="tab" href="#signup"><p class="nav-link">Sign Up</p></a></li>
                                 {{-- @else
                                        @if (auth()->guard('admin')->check())
                                              <li>
@@ -186,14 +186,14 @@
                                 @endif --}}
                                 @if (Auth::guard('web')->check())
                                     {{-- <small>{{ Auth::user()->name }}</small> --}}
-                                    <li><a class="dropdown-item" href="/Profile/">{{ Auth::user()->name }}</a></li>
-                                    <li><a class="dropdown-item" href="/myOrder">My Order</a></li>
+                                    <li><a class="dropdown-item" href="/Profile/"><p class="nav-link">{{ Auth::user()->name }}</p></a></li>
+                                    <li><a class="dropdown-item" href="/myOrder"><p class="nav-link">My Order</p></a></li>
                                     @if (auth()->user()->type == 1)
-                                       <li><a class="dropdown-item" href="/myProduct">My Product</a></li>
+                                       <li><a class="dropdown-item" href="/myProduct"><p class="nav-link">My Product</p></a></li>
                                     @endif
                                     <li><a class="dropdown-item"
                                             onclick="event.preventDefault(); document.getElementById('user-logout-form').submit();"
-                                            href="{{ route('logout') }}">Log Out</a></li>
+                                            href="{{ route('logout') }}"><p class="nav-link">Log Out</p></a></li>
                                 @endif
                         </ul>
                         {{-- <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
@@ -206,7 +206,7 @@
                   </li>
                 </ul>
             </div>
-    </div>
+        </div>
     </nav>
     @include('partials.search')
     {{-- <!--recherche modal-->
@@ -239,7 +239,7 @@
                         <div class="">
                             <div class="d-flex justify-content-center" style="margin-bottom: 20px">
                                 <div class="brand_logo_container">
-                                    <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                    <img src="\image\mrare.jpg" class="brand_logo" alt="Logo">
                                 </div>
                             </div>
                             <div class="container h-100">
@@ -247,7 +247,7 @@
                                     <div class="">
                                         <div class="d-flex justify-content-center">
                                             <div class="brand_logo_container">
-                                                <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                                <img src="\image\mrare.jpg" class="brand_logo" alt="Logo">
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center form_container">
@@ -336,18 +336,18 @@
 
     <footer id="footer" class=" text-center mt-5 py-2">
         <div class="row container mx-auto pt-5">
-            <div class="footer-one col-lg-4 col-md-6 col-12">
-                <img style="margin-bottom: 20px; font-size: 100px;" id="navlogo" src="/image/footer@2x.png" alt="logo">
+            <div class="footer-one col-lg-5 col-md-7 col-12" style="margin-right: 90px">
+                <img style="margin-bottom: 40px; font-size: 100px;" id="navlogo" src="/image/footer@2x.png" alt="logo">
                 <p>Hello and welcome to M-Rare Store, the place to find the best medicines, foods and all the
                     parapharmacy of rare diseases.</p>
 
             </div>
-            <div class="footer-one col-lg-3 col-md-6 col-12">
+            <div class="footer-one col-lg-3 col-md-6 col-12" style="text-align:left">
                 <h4 class="pb-2">
-                    <p>Navigation</p>
+                    <p style="font-size: 25px">Navigation</p>
                 </h4>
                 <ul class="text-uppercase list-unstyled">
-                    <li><a href="#homme" style=" text-decoration: none; font-size: 12px;">
+                    <li><a href="#homme" style="  text-decoration: none; font-size: 12px;">
                             <p>Homme</p>
                         </a>
                     </li>
@@ -381,9 +381,9 @@
             </div>
 
 
-            <div class="footer-one col-lg-3 col-md-6 col-12" style="">
+            <div class="footer-one col-lg-3 col-md-6 col-12" style="text-align:left">
                 <h4 class="pb-2">
-                    <p>Contact</p>
+                    <p style="font-size: 25px">Contact</p>
                 </h4>
                 <div>
                     <h6 class="text-uppercase">Adress</h6>
@@ -434,6 +434,18 @@
         <!-- Grid container -->
 
     </footer>
+    <div class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: white;">
+          © 2022 Copyright:
+          <a class="text-dark" href="">M-Rare Store.com</a>
+        </div>
+        <!-- Copyright -->
+    </div>
+
+    <button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
 
     <!--login modal-->
@@ -445,7 +457,7 @@
                         <div class="">
                             <div class="d-flex justify-content-center" style="margin-bottom: 30px">
                                 <div class="brand_logo_container">
-                                    <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                    <img src="\image\mrare.jpg" class="brand_logo" alt="Logo">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center form_container">
@@ -532,7 +544,7 @@
                             <div class="">
                                 <div class="d-flex justify-content-center">
                                     <div class="brand_logo_container">
-                                        <img src="\image\mrare.png" class="brand_logo" alt="Logo">
+                                        <img src="\image\mrare.jpg" class="brand_logo" alt="Logo">
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center form_container">
@@ -645,25 +657,26 @@
                                 </div>
                                 <div class="d-flex justify-content-center form_container">
                                     <form method="POST" action="{{ route('password.update') }}"
-                                        style="width: 300px; ">
+                                        style="width: 200px; ">
                                         @csrf
                                         {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
-                                        <div style="margin-bottom: 10px;">
+                                        <div style="margin-bottom: 10px; color:white">
                                             <h3 class="text-center">Forgot Password?</h3>
                                             <p class="text-center">You can reset your password here.</p>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group mb-10">
-                                                <div class="input-group-append">
+                                                <div class="input-group-append mb-3">
                                                     <span class="input-group-text"><i
                                                             class="bi bi-envelope-fill"></i></span>
-                                                </div>
-                                                <input id="email" type="email"
+
+                                                 <input id="email" type="email"
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     name="email" value="{{ $email ?? old('email') }}" required
                                                     autocomplete="email" autofocus value="" placeholder="E-mail Adress"
                                                     oninvalid="setCustomValidity('Please enter a valid email address!')"
                                                     onchange="try{setCustomValidity('')}catch(e){}" required="">
+                                                </div>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -671,14 +684,15 @@
                                                 @enderror
                                             </div>
                                             <div class="input-group mb-10">
-                                                <div class="input-group-append">
+                                                <div class="input-group-append mb-3">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-key"></i></span>
-                                                </div>
+
                                                 <input id="password" type="password"
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     name="password" required autocomplete="new-password"
                                                     placeholder="password">
+                                                </div>
 
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -687,13 +701,14 @@
                                                 @enderror
                                             </div>
                                             <div class="input-group mb-10">
-                                                <div class="input-group-append">
+                                                <div class="input-group-append mb-3">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-key"></i></span>
-                                                </div>
+
                                                 <input id="password-confirm" type="password" class="form-control"
                                                     name="password_confirmation" required autocomplete="new-password"
                                                     placeholder="confirm password">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center mt-3 login_container">
@@ -717,7 +732,7 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 
     {{-- contact us --}}
     <div class="modal fade " id="contact">
@@ -727,7 +742,7 @@
                 <div class="modal-body">
 
                     <div class=" text-center mt-5 ">
-                        <h1 style=" margin-bottom: 40px; color:#60a3bc">Contact Us</h1>
+                        <h1 style=" margin-bottom: 40px; color:#3399cc">Contact Us</h1>
                     </div>
                     @if (Session::has('success'))
                         <div class="alert alert-success">
@@ -878,7 +893,6 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     @stack('javascript')
 
-    var path = "{{ request()->path() }}";
     @if ( request()->path() == 'login')
         document.querySelector('[href="#login"]').click();
     @endif

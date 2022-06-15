@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWishlistsTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateWishlistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishlists', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('product_id')->unsigned()->nullable();
+            $table->string('name');
+            $table->integer('category_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->foreign("user_id")->references("id")->on("users");
-            $table->foreign("product_id")->references("id")->on("products");
+            $table->foreign("category_id")->references("id")->on("categories")->onDelete("cascade");
         });
     }
 
@@ -30,6 +29,6 @@ class CreateWishlistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlists');
+        Schema::dropIfExists('subcategories');
     }
 }

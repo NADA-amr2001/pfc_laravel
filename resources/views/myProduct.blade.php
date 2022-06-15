@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <section id="medicines" style="margin-top:30px">
-        <div class="col-md-1">
-            <a id="add-btn" data-toggle="modal"
-            data-target="#add" data-bs-target="#add" role="tab" href="#add"class="btn "><i class="fa fa-plus"></i></a>
+        <div class="col-md-2">
+            <div class="card" id="buy-card">
+                    <a style="height: 300px" id="add-btn" data-toggle="modal" data-target="#add" data-bs-target="#add" role="tab" href="#add"class="btn "><i style="margin-top: 100px; font-size:40px;" class="fa fa-plus"></i></a>
+            </div>
         </div>
 
         <div class="row mx-auto container">

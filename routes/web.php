@@ -6,6 +6,7 @@ use App\Http\Controllers;
 use App\models\Product;
 use App\models\Category;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CheckOutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class,
 //seller
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
+Route::resource('subCtegories', App\Http\Controllers\SubCategoryController::class);
 
 Route::put('/products/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
 //Route::get('products/category/{category}',[App\Http\Controllers\ProductController::class, 'getProductByCategory'])->("category.products");
@@ -72,6 +74,9 @@ Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name
 Route::post('/add/cart/{product}', [App\Http\Controllers\CartController::class, 'addProductToCart'])->name('add.cart');
 Route::delete('/remove/{product}/cart', [App\Http\Controllers\CartController::class, 'removeProductFromCart'])->name('remove.cart');
 Route::put('/update/{product}/cart', [App\Http\Controllers\CartController::class, 'updateProductOnCart'])->name('update.cart');
+Route::get('/emptyCart', function(){
+     Cart::destroy();
+});
 
 //admin routes
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
@@ -123,6 +128,10 @@ Route::get('/success-payment',[App\Http\Controllers\PaypalPaymentController::cla
 //contact us
 Route::get('/contact-us', [ContactController::class, 'index']);
 Route::post('/contact-us', [ContactController::class, 'save'])->name('contact.store');
+
+//chech out
+Route::get('/check-out', [CheckOutController::class, 'index']);
+Route::post('/check-out', [CheckOutController::class, 'save'])->name('check.store');
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
 

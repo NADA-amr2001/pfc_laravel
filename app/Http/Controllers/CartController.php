@@ -25,6 +25,7 @@ class CartController extends Controller
 
     //add item to cart
     public function addProductToCart(Request $request,Product $product){
+       // dd($request);
         \Cart::add(array(
             "id" => $product->id,
             "name" => $product->title,
@@ -55,6 +56,25 @@ class CartController extends Controller
         \Cart::remove($product->id);
         return redirect()->route("cart.index");
 
+    }
+
+    public function store(Request $request){
+
+
+      $duplicata =  \Cart::search(function ($cartItem, $rowId) {
+            return $cartItem->id == $request->product_id;
+        });
+
+        if($duplicata->isNotEmpty()) {
+
+        return redirect()->route('products')->with('success', 'the product has already been added');
+        }
+
+        $product = Product::find($request->product_id);
+
+        \Cart::add($product->id, $product->title, 1, $product->price)->associate('App\Product');
+
+        return redirect()->route('products')->with('success', 'the product has been added');
     }
 
 }

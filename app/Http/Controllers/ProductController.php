@@ -223,13 +223,12 @@ class ProductController extends Controller
     }
 
     public function search(){
+
          $q = request()->input('q');
     $products=Product::where('title','like',"%$q%")
-    ->orwhere('description','like',"%$q%")
-    ->paginate(6);
-
-
-   return view('products.search')->with('products',$products);
+          ->orwhere('description','like',"%$q%")
+          ->paginate(6);
+        return view('products.search')->with('products',$products);
     }
 
     public function updatewishlist( Request $request){
@@ -247,10 +246,10 @@ class ProductController extends Controller
                 // $wishlist->user_id = $data['user_id'];
                 // $wishlist->product_id = $data['product_id'];
                 // $wishlist->save();
-                return response()->json(['action' => 'add', 'message' => 'product Added Successefully to Wishlist']);
+                return response()->json(['action' => 'add', 'message' => 'product Added Successefully']);
             }else{
                 Wishlist::where(['user_id' => Auth::user()->id, 'product_id' => $data['product_id']])->delete();
-                return response()->json(['action' => 'remove', 'message' => 'product Removed Successefully to Wishlist']);
+                return response()->json(['action' => 'remove', 'message' => 'product Removed Successefully']);
             }
         // }
 

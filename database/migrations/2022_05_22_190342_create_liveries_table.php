@@ -14,7 +14,12 @@ class CreateLiveriesTable extends Migration
     public function up()
     {
         Schema::create('liveries', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id')->unsigned();
+            $table->string('fname');
+            $table->string('lname');
+            $table->string('email');
+            $table->string('phone')->nullable();
+            $table->text('adress');
             $table->timestamps();
         });
     }

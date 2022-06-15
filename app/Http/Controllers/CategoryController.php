@@ -26,8 +26,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // $parentCategories = \App\Category::where('parent_id',null)->get();
 
+        //  return view('products', compact('parentCategories'));
     }
 
     /**
@@ -52,6 +53,16 @@ class CategoryController extends Controller
             'title' => 'required|string',
 
          ]);
+
+         if($this->category_id){
+            $category = new Subcategory();
+            $category->name = $this->name;
+            $category->category_id = $this->category_id;
+            $category->save();
+         }
+         else{
+            $category = Category::create(request()->all());
+         }
          $category = Category::create(request()->all());
         return back()->with('success', 'Your form has been submitted.');
 
@@ -71,6 +82,7 @@ class CategoryController extends Controller
             return view('products')->with([
                 "products" => $category->products()->with('user')->paginate(10),
                 "categories" =>Category::has("products.user")->get(),
+                "subCategories" => $category->subCategories()->with('product'),
             ]);
     }
 

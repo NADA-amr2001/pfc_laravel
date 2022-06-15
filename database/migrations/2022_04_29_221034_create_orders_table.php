@@ -15,8 +15,8 @@ class CreateOrdersTable extends Migration
     {
         if(!Schema::hasTable('orders')){
             Schema::create('orders', function (Blueprint $table) {
-                $table->id();
-                $table->bigInteger("user_id")->unsigned();
+                $table->increments('id')->unsigned();
+                $table->integer("user_id")->unsigned()->nullable();
                 $table->string("product_name");
                 $table->double("total",8,2);
                 $table->boolean("paid")->default(0);
@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
                 $table->foreign("user_id")
                       ->references("id")
                       ->on("users")
-                      ->onDelete("cascade")->unsigned()->index();
+                      ->onDelete("cascade");
                 // $table->foreign("user_id")->references("id")->on("users");
             });
 

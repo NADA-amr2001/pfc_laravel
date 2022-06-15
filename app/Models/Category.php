@@ -15,6 +15,13 @@ class Category extends Model
         return "slug";
     }*/
 
+    protected $table = "categories";
+
+
+    public function SubCategories(){
+        return $this->hasMany(Subcategory::class, 'category_id');
+    }
+
     public function products(){
         return $this->hasMany(Product::class);
     }

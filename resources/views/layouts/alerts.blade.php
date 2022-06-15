@@ -34,7 +34,6 @@
 @endif
 
 @if (request()->input(""))
-<h6> {{ $products -> total() }}resultat(s) pour la recherche "{{request()->q     }}" </h6>
-
+<h6> {{ $products -> total() }}resultat(s) pour la recherche "{{request()->q }}" </h6>
 @endif
 
