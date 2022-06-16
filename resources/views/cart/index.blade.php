@@ -139,7 +139,7 @@
                         <div class="card mt-2 mx-auto p-1 bg-light">
                             <div id="card_l" class="card-body bg-light">
                                 <div class="container" style="width: 440px">
-                                    <form id="checkout-form" role="form" method="post" action="check-out">
+                                    <form id="checkout-form" role="form" method="post"  action="/createOrders">
                                         {{ csrf_field() }}
                                         <div class="controls">
                                             <div class="row">
@@ -227,10 +227,10 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="POST" action="/createOrders">
-                                                        @csrf
+                                                    {{-- <form method="POST" action="/createOrders">
+                                                        @csrf --}}
                                                         <button type="submit" class="btn btn-send  pt-2 btn-block" style="margin-left:100px">Check Out </button>
-                                                    </form>
+                                                    {{-- </form> --}}
                                                 </div>
                                             </div>
                                         </div>

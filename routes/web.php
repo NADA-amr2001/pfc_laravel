@@ -130,8 +130,8 @@ Route::get('/contact-us', [ContactController::class, 'index']);
 Route::post('/contact-us', [ContactController::class, 'save'])->name('contact.store');
 
 //chech out
-Route::get('/check-out', [CheckOutController::class, 'index']);
-Route::post('/check-out', [CheckOutController::class, 'save'])->name('check.store');
+Route::get('/createOrders"', [CheckOutController::class, 'index']);
+Route::post('/createOrders"', [CheckOutController::class, 'save'])->name('check.store');
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
 

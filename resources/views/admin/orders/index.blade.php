@@ -52,7 +52,7 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
-            <img id="navlogo" href="{{ url('/') }}" src="/image/logo@2x.png" alt="logo">
+            <img id="navlogo" href="{{ url('/') }}" src="/image/logo1@2x.png" alt="logo">
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
