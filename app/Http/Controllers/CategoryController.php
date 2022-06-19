@@ -81,8 +81,7 @@ class CategoryController extends Controller
 
             return view('products')->with([
                 "products" => $category->products()->with('user')->paginate(10),
-                "categories" =>Category::has("products.user")->get(),
-                "subCategories" => $category->subCategories()->with('product'),
+                "categories" =>Category::with('categories')->has("products.user")->get(),
             ]);
     }
 

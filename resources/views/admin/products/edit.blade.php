@@ -131,14 +131,23 @@
                                     </div>
 
                                     <div class="input-group mb-4">
-                                        <select style="width: 200px; height:35px;" required class="form-select" name="category_id"
-                                            aria-label="Default select example">
+                                        <select  required class="form-select" style="height:35px; width:200px" name="category_id">
                                             <option disabled selected>Select the category</option>
                                             @php
-                                                $categories = App\Models\Category::all();
+                                              $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
                                             @endphp
                                             @foreach ($categories as $category)
-                                               <option {{ $product->category_id === $category->id ? "selected" : "" }} value="{{ $category->id }}" >{{ $category->title }}</option>
+                                            @if ($category->categories!=null)
+
+                                                <optgroup label="{{ $category->title }}">
+                                                    @foreach ($category->categories as $subcategory)
+                                                          <option {{ $product->category_id === $subcategory->id ? "selected" : "" }} value="{{ $subcategory->id }}"> {{ $subcategory->title }}</option>
+                                                    @endforeach
+                                                </optgroup>
+                                            @else
+                                                <optgroup label="{{ $category->title }}">
+                                                </optgroup>
+                                            @endif
                                             @endforeach
                                         </select>
                                     </div>

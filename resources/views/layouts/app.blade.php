@@ -53,6 +53,27 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <style>
+        .navbar-nav li:hover > ul.dropdown-menu {
+display: block;
+}
+.dropdown-submenu {
+position:relative;
+}
+.dropdown-submenu > .dropdown-menu {
+top: 0;
+left: 100%;
+margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+text-decoration: underline;
+transform: rotate(-90deg);
+}
+
+    </style>
+
     <div id="notifDiv"></div>
 
 
@@ -80,9 +101,10 @@
                         <li class="nav-item">
                             <a style="margin-top: 10px;" class="nav-link active" href="/">Home</a>
                         </li>
+
                         {{-- @if (Auth::guest() && Auth::user()) --}}
                         @php
-                            $categories = App\Models\Category::all();
+                            $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
                         @endphp
                         <li class="nav-item">
                             <div class="dropdown me-2">
@@ -91,14 +113,22 @@
                                     data-bs-offset="10,20">Shop</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                                     @foreach ($categories as $category)
-                                        <li><a class="dropdown-item" id="medic-btn"
-                                                href="/categories/{{ $category->id }}">{{ $category->title }}</a>
-                                        </li>
+                                    @if ($category->categories!=null)
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle"  href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                                        <ul class="dropdown-menu">
+                                            @foreach ($category->categories as $subcategory)
+                                            <li><a class="dropdown-item"  href="/categories/{{ $subcategory->id }}">{{ $subcategory->title }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @else
+                                    <li><a class="" id="medic-btn"
+                                            href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                                    </li>
+                                    @endif
                                     @endforeach
-
-
                                     <!-- <li><a class="dropdown-item" id="food-btn"  href="/food">Food</a></li>
-                         <li><a class="dropdown-item" id="equip-btn" href="/equipements">Equipements</a></li> -->
+                                    <li><a class="dropdown-item" id="equip-btn" href="/equipements">Equipements</a></li> -->
                                 </ul>
                             </div>
                         </li>
@@ -287,19 +317,53 @@
                                                 </div>
 
                                                 <div class="input-group mb-2">
-                                                    <select style="height:35px; width:200px" required class="form-select" name="category_id"
+
+                                                <select  style="height:35px; width:200px" required class="form-select" name="category_id"
+                                                    aria-label="Default select example">
+                                                    <option disabled selected>Select the category</option>
+                                                    @php
+                                                      $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
+                                                    @endphp
+                                                    @foreach ($categories as $category)
+                                                    @if ($category->categories!=null)
+
+                                                        <optgroup label="{{ $category->title }}">
+                                                            @foreach ($category->categories as $subcategory)
+                                                                  <option value="{{ $subcategory->id }}"> {{ $subcategory->title }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @else
+                                                        <option label="{{ $category->title }}">{{ $category->title }}
+                                                        </option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+
+                                                    {{-- <select style="height:35px; width:200px" required class="form-select" name="category_id"
                                                         aria-label="Default select example">
                                                         <option disabled selected>Select the category</option>
                                                         @php
-                                                            $categories = App\Models\Category::all();
-                                                        @endphp
+                                                        $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
+                                                    @endphp
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}">
+                                                        @if ($category->categories!=null)
+                                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle"  href="/categories/{{ $category->id }}"> <option  value="{{ $category->id }}" >
+                                                            {{ $category->title }}</option></a>
+                                                            <ul class="dropdown-menu">
+                                                                @foreach ($category->categories as $subcategory)
+                                                                <li><a class="dropdown-item"  href="/categories/{{ $subcategory->id }}"> <option  value="{{ $subcategory->id }}" >
+                                                                    {{ $subcategory->title }}</option></a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                        @else
+                                                            <option  value="{{ $category->id }}" >
                                                                 {{ $category->title }}</option>
+                                                        @endif
                                                         @endforeach
 
 
-                                                    </select>
+                                                    </select> --}}
                                                 </div>
 
                                                 <div class="d-flex justify-content-center mt-3 login_container">

@@ -83,11 +83,14 @@ class ProductController extends Controller
          ]);
 
           $product = $request->all();
+         // dd($product);
           $name = $request->file('image')->getClientOriginalName();
           $request->image->move(public_path('uploads/images'), $name);
           $path = "/uploads/images/$name";
           $product['image']= $path;
           $product['in_stock']= $request->qty;
+          $product['category_id']= $request->category_id;
+
         //  Store data in database
         // $product = Product()
         auth()->user()->products()->create( $product);
@@ -177,7 +180,7 @@ class ProductController extends Controller
           $request->session()->flash('msg', 'Product has been updated');
 
           // Redirect
-          return redirect('/');
+          return back()->with('success', 'Your form has been submitted.');
            // return redirect()->route("admin.products")->withSucces("Updated Product");
 
     }
@@ -201,6 +204,7 @@ class ProductController extends Controller
 
          $product = Product::findOrfail($id);
 
+
             $image_path = public_path("images/products".$product->image);
             if(File::exists($image_path)){
                 unlink($image_path);
@@ -209,7 +213,7 @@ class ProductController extends Controller
 
             // dd($product);
              $product->delete();
-             return redirect("/")->with("delete", "Product has been deleted");
+             return back()->with('success', 'Delleted.');
 
 
              // Delete the product
@@ -228,7 +232,8 @@ class ProductController extends Controller
     $products=Product::where('title','like',"%$q%")
           ->orwhere('description','like',"%$q%")
           ->paginate(6);
-        return view('products.search')->with('products',$products);
+          $view = view('products.search')->with('products',$products);
+        return $view;
     }
 
     public function updatewishlist( Request $request){

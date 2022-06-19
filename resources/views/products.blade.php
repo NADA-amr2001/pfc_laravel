@@ -2,30 +2,50 @@
 @section('content')
     <section id="medicines" style="margin-top:30px">
 
-            @php
-                $categories = App\Models\Category::all();
+
+        {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset"> --}}
+            {{-- @foreach ($categories as $category)
+            @if ($category->categories!=null)
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle"  href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                <ul class="dropdown-menu">
+                    @foreach ($category->categories as $subcategory)
+                    <li><a class="dropdown-item"  href="/categories/{{ $subcategory->id }}">{{ $subcategory->title }}</a></li>
+                    @endforeach
+                </ul>
+            </li>
+            @else
+            <li><a class="dropdown-item" id="medic-btn"
+                    href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+            </li>
+            @endif
+            @endforeach --}}
+        {{-- </ul> --}}
+
+            {{-- @php
+                $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
             @endphp
             <ul class="nav nav-tabs">
                 @foreach ($categories as $category )
+                 @if ($category->categories!=null)
                 <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{$category->title}}
-                      <span class="caret"></span></a>
+                      <span class=""></span></a>
                         <ul class="dropdown-menu">
-                            @if(count((is_countable($subCategories)?$subCategories:[]))>0)
-                            @foreach ($subCategories as $subcategory )
+                            @if(count((is_countable($categories)?$categories:[]))>0)
+                            @foreach ($categories as $category )
                              <li>
-                                <a href="#" class=""> {{$subcategory->title}} </a>
+                                <a href="#" class=""> {{$category->title}} </a>
                              </li>
                             @endforeach
                             @endif
                         </ul>
                 </li>
                 @endforeach
-            </ul>
+            </ul> --}}
 
 
            {{-- @foreach ($categories as $category)
-             @foreach ($category->subCategories as $subcategory)
+             @foreach ($category->categories as $subcategory)
              <a class="list-group-item font-weight-bold list-group-item-action"
                       href="">{{ $subcategory->title }}
              </a>
@@ -42,7 +62,7 @@
                 <div class="card" onclick="openproduct()" id="buy-card">
 
                     @guest
-                    <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="#detail-{{ $product->id }}" class="btn " src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
+                    <img style="width:24rem; height:15rem;" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="#detail-{{ $product->id }}" class="btn " src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">
                     <div class="card-body">
                       <h5 class="card-title">{{$product->title}}</h5>
                         <p class="card-text">{{$product->price}} DA</p>
@@ -56,7 +76,7 @@
 
                     @auth
                     @if (auth()->user()->id == $product->user_id)
-                    <img style="width:24rem; height:130px" href="" class="btn "  data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn "
+                    <img style="width:24rem; height:160px" href="" class="btn "  data-toggle="modal" data-bs-target="#detail-{{ $product->id }}" data-target="#detail-{{ $product->id }}" role="tab" href="" class="btn "
                     src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->title }}">
                     @else
                     <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail-{{ $product->id }}"
@@ -71,7 +91,7 @@
                             @if (auth()->user()->id == $product->user_id)
                              <div class="btn-container" style="display: flex;">
                               <a id="detail-btn_{{ $product->id }}" data-toggle="modal" data-bs-target="#update-{{ $product->id }}"
-                                data-target="#update-{{ $product->id }}" role="tab" href="" class="btn "><i class="fa fa-edit"></i></a>
+                                data-target="#update-{{ $product->id }}" role="tab" href="#update-{{ $product->id }}" class="btn "><i class="fa fa-edit"></i></a>
                               <form id=" {{ $product->id }} "  method="POST" action="{{ route("products.destroy",$product->id) }}">
                                 @csrf
                                 @method("DELETE")
@@ -115,6 +135,13 @@
             {{ $products->links() }}
         </div>
     </section>
+
+
+    {{-- @include('partials.show') --}}
+    {{-- @php
+        $witem = Cart::instance('wishlist')->content()->pluck('id');
+    @endphp --}}
+    @foreach ($products as $product)
 
     <div class="modal fade " id="update-{{ $product->id }}">
         <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
@@ -160,7 +187,7 @@
                                                 </div>
 
                                                 <div class="input-group mb-2">
-                                                    <select required class="form-select" name="category_id"
+                                                    {{-- <select required class="form-select" name="category_id"
                                                         aria-label="Default select example" style="width: 200px; height:35px;">
                                                         <option disabled selected>Select the category</option>
                                                         @php
@@ -169,7 +196,26 @@
                                                         @foreach ($categories as $category)
                                                            <option {{ $product->category_id === $category->id ? "selected" : "" }} value="{{ $category->id }}" >{{ $category->title }}</option>
                                                         @endforeach
-                                                    </select>
+                                                    </select> --}}
+                                                    <select  required class="form-select" style="height:35px; width:200px" name="category_id">
+                                                    <option disabled selected>Select the category</option>
+                                                    @php
+                                                      $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
+                                                    @endphp
+                                                    @foreach ($categories as $category)
+                                                    @if ($category->categories!=null)
+
+                                                        <optgroup label="{{ $category->title }}">
+                                                            @foreach ($category->categories as $subcategory)
+                                                                  <option {{ $product->category_id === $subcategory->id ? "selected" : "" }} value="{{ $subcategory->id }}"> {{ $subcategory->title }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @else
+                                                        <optgroup label="{{ $category->title }}">
+                                                        </optgroup>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
                                                 </div>
                                                 <br>
 
@@ -191,13 +237,6 @@
 
         </div>
     </div>
-
-    {{-- @include('partials.show') --}}
-    {{-- @php
-        $witem = Cart::instance('wishlist')->content()->pluck('id');
-    @endphp --}}
-    @foreach ($products as $product)
-
         <div id="detail-{{ $product->id }}" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                 <div class="modal-content card " style="height: 100%; width: 100%" id="details">
@@ -313,8 +352,7 @@
                                         @guest
                                         <a id="add" class="add-to-cart btn"  data-toggle="modal"
                                         data-target="#login" data-bs-target="#login"
-                                           ><i class="fa fa-shopping-cart"></i>Login to Add To
-                                            Cart</a>
+                                           ><i class="fa fa-shopping-cart"></i>Login to Add To Cart</a>
                                         @endguest
                                     </div>
                                 </div>

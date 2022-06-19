@@ -132,16 +132,26 @@
                                         </div>
 
                                         <div class="input-group mb-2" style="margin-bottom: 4px; ">
-                                            <select required class="form-select" name="category_id" style="width: 200px; height: 35px"
-                                                aria-label="Default select example">
-                                                <option disabled selected>Select the category</option>
-                                                @php
-                                                    $categories = App\Models\Category::all();
-                                                @endphp
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">
-                                                        {{ $category->title }}</option>
-                                                @endforeach
+                                            <select  style="height:35px; width:200px" required class="form-select" name="category_id"
+                                                    aria-label="Default select example">
+                                                    <option disabled selected>Select the category</option>
+                                                    @php
+                                                      $categories = App\Models\Category::whereNull('category_id')->with("categories")->get();
+                                                    @endphp
+                                                    @foreach ($categories as $category)
+                                                    @if ($category->categories!=null)
+
+                                                        <optgroup label="{{ $category->title }}">
+                                                            @foreach ($category->categories as $subcategory)
+                                                                  <option value="{{ $subcategory->id }}"> {{ $subcategory->title }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @else
+                                                        <optgroup label="{{ $category->title }}">
+                                                        </optgroup>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
 
 
                                             </select>

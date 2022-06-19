@@ -369,7 +369,7 @@ footer li a:hover{
     cursor: pointer;
     margin-bottom: 2rem;
     margin-right: 2rem;
-    height: 27rem;
+    height: 30rem;
     width: 24rem;
     font-size: 18px;
 }
@@ -495,6 +495,7 @@ footer li a:hover{
 
   .product-title, .price {
     text-transform: UPPERCASE;
+    width: 400px;
     font-weight: bold; }
 
   .checked, .price  span {

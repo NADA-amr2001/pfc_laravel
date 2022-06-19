@@ -1,10 +1,18 @@
 
 @extends('layouts.app')
 @section('content')
-
  <section id="medicines" style="margin-top:30px">
     <div class="row mx-auto container">
        <!--products-->
+       @if (sizeof($products) ==0)
+
+        <div style="margin-left: 450px;" class="alert alert-info " >
+            <strong>No products</strong>
+            <button type="button " class="close">
+                <span>&times;</span>
+            </button>
+        </div>
+       @endif
      @foreach ($products as $product)
       <div class="card"  onclick="openproduct()" id="buy-card">
           <img style="width:24rem; height:130px" data-toggle="modal" data-bs-target="#detail" data-target="#detail" role="tab" href="" class="btn " src="{{$product->image}}" class="card-img-top" alt="{{$product->title}}">

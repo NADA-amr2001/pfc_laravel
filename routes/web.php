@@ -5,6 +5,7 @@ use App\Http\Controllers;
 //use App\Http\Controllers\ProductController;
 use App\models\Product;
 use App\models\Category;
+use App\models\Wishlist;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CheckOutController;
 
@@ -20,7 +21,12 @@ use App\Http\Controllers\CheckOutController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   $wishlists = Wishlist::with('product')
+                                    //   ->where('user_id', auth()->user()->id)
+                                      ->orderby('id', 'desc')->get();
+    return view('welcome', [
+        "wishlists" =>$wishlists
+    ]);
 });
 
 // Route::get('/medicines/:id', function ($id) {
@@ -59,6 +65,8 @@ Route::resource('categories', App\Http\Controllers\CategoryController::class);
 Route::resource('subCtegories', App\Http\Controllers\SubCategoryController::class);
 
 Route::put('/products/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
+Route::put('/products/{id}', [App\Http\Controllers\WishlistController::class, 'update'])->name('products.update');
+Route::delete('/products/{id}', [App\Http\Controllers\WishlistController::class, 'destroy'])->name('products.destroy');
 //Route::get('products/category/{category}',[App\Http\Controllers\ProductController::class, 'getProductByCategory'])->("category.products");
 // Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 
